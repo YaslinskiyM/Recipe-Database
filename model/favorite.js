@@ -21,7 +21,7 @@ Favorite.init(
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    recipe_user_id: {
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
     }
