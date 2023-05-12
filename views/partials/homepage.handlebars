@@ -18,15 +18,16 @@
         </nav>
     <h1>Welcome to the Recipe Homepage</h1>
     </header>
-   
-    <H2>Featured Recipes</H2>
-     <div>
-        <ul>Recipe 1 Name</ul>
-        <ul>Recipe 2 Name</ul>
-        <ul>Recipe 3 Name</ul>
-        <ul>Recipe 4 Name</ul>
-        <ul>Recipe 5 Name</ul>
-        <ul>Recipe 6 Name</ul>
-     </div>
+  <h2>Featured Recipes</h2>
+    <div id="featured-recipes"></div>
+
+    <script id="featured-recipes-template" type="text/x-handlebars-template">
+        <ul>
+            {{#each recipes}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </script>
+<script src="/js/homePage.js"></script>
 </body>
 </html>
