@@ -1,5 +1,6 @@
-const { users } = require("../models");    // Importing the recipe model
-const usersData =
+
+const { User } = require('../models');
+const userData =
 [
     {
         "first_name":"John",
@@ -33,3 +34,7 @@ const usersData =
     }
 
 ]
+
+const seedUser = () => User.bulkCreate(userData);
+
+module.exports = seedUser;

@@ -1,9 +1,8 @@
 const router = require('express').Router();
-const { User, Recipe, Category, Favorite } = require('../../models');
-
+const { User, Recipe, Category, Saved } = require('../../models');
 
 router.get('/', (req, res) => {
-    Favorite.findAll({
+    Saved.findAll({
         attributes: ['id', 'recipe_id', 'user_id'],
         include: [
             {
@@ -20,7 +19,7 @@ router.get('/', (req, res) => {
             }
         ]
     })
-    .then(dbFavoriteData => res.json(dbFavoriteData))
+    .then(dbSavedData => res.json(dbSavedData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -29,7 +28,7 @@ router.get('/', (req, res) => {
 );
 
 router.get('/:id', (req, res) => {
-    Favorite.findOne({
+    Saved.findOne({
         where: {
             id: req.params.id
         },
@@ -49,12 +48,12 @@ router.get('/:id', (req, res) => {
             }
         ]
     })
-    .then(dbFavoriteData => {
-        if (!dbFavoriteData) {
-            res.status(404).json({ message: 'No favorite found with this id' });
+    .then(dbSavedData => {
+        if (!dbSavedData) {
+            res.status(404).json({ message: 'No saved recipe found with this id' });
             return;
         }
-        res.json(dbFavoriteData);
+        res.json(dbSavedData);
     })
     .catch(err => {
         console.log(err);
@@ -64,11 +63,11 @@ router.get('/:id', (req, res) => {
 );
 
 router.post('/', (req, res) => {
-    Favorite.create({
+    Saved.create({
         recipe_id: req.body.recipe_id,
-        user_id: req.body.user_id
+        user_id: req.session.user_id
     })
-    .then(dbFavoriteData => res.json(dbFavoriteData))
+    .then(dbSavedData => res.json(dbSavedData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -77,37 +76,44 @@ router.post('/', (req, res) => {
 );
 
 router.put('/:id', (req, res) => {
-    Favorite.update(req.body, {
-        where: {
-            id: req.params.id
+    Saved.update(
+        {
+            recipe_id: req.body.recipe_id
+        },
+        {
+            where: {
+                id: req.params.id
+            }
         }
-    })
-    .then(dbFavoriteData => {
-        if (!dbFavoriteData) {
-            res.status(404).json({ message: 'No favorite found with this id' });
+    )
+    .then(dbSavedData => {
+        if (!dbSavedData) {
+            res.status(404).json({ message: 'No saved recipe found with this id' });
             return;
         }
-        res.json(dbFavoriteData);
-    })
+        res.json(dbSavedData);
+    }
+    )
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
-    });
+    }
+    );
 }
 );
 
 router.delete('/:id', (req, res) => {
-    Favorite.destroy({
+    Saved.destroy({
         where: {
             id: req.params.id
         }
     })
-    .then(dbFavoriteData => {
-        if (!dbFavoriteData) {
-            res.status(404).json({ message: 'No favorite found with this id' });
+    .then(dbSavedData => {
+        if (!dbSavedData) {
+            res.status(404).json({ message: 'No saved recipe found with this id' });
             return;
         }
-        res.json(dbFavoriteData);
+        res.json(dbSavedData);
     })
     .catch(err => {
         console.log(err);
