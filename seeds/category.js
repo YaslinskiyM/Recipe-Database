@@ -1,4 +1,5 @@
-const { category } = require("../models");    // Importing the recipe model
+const { Category } = require('../models');
+
 const categoryData =
 
 [
@@ -18,3 +19,7 @@ const categoryData =
         "category_name": "Shellfish"
     }
 ]
+
+const seedCategories = () => Category.bulkCreate(categoryData);
+
+module.exports = seedCategories;

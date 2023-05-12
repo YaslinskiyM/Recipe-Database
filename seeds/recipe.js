@@ -1,4 +1,4 @@
-const { recipe } = require("../models");    // Importing the recipe model
+const { Recipe } = require('../models');
 const recipeData =
 [
     {
@@ -27,3 +27,7 @@ const recipeData =
         "recipe_steps": "1 Prep the shrimp: Peel and devein the shrimp. Rinse in cold water and drain. Place in a bowl with the olive oil, salt, pepper, and garlic and toss to combine. Cover and refrigerate until needed."
     }
 ]
+
+const seedRecipe = () => Recipe.bulkCreate(recipeData);
+
+module.exports = seedRecipe;
