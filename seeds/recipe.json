@@ -1,3 +1,5 @@
+const { recipe } = require("../models");    // Importing the recipe model
+const recipeData =
 [
     {
         "recipe_name": "Chicken Parmesan",
