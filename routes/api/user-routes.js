@@ -17,16 +17,16 @@ router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
         where: { id: req.params.id },
-        include: [
-            {
-                model: Favorite,
-                attributes: ['id', 'recipe_id', 'user_id'],
-                include: {
-                    model: Saved,
-                    attributes: ['id', 'recipe_id', 'user_id']
-                }
-            }
-        ]
+        // include: [
+        //     {
+        //         model: Favorite,
+        //         attributes: ['id', 'recipe_id', 'user_id'],
+        //         include: {
+        //             model: Saved,
+        //             attributes: ['id', 'recipe_id', 'user_id']
+        //         }
+        //     }
+        // ]
     })
     .then(dbUserData => {
         if (!dbUserData) {
@@ -50,17 +50,8 @@ router.post('/', (req, res) => {
         login_id: req.body.login_id,
         password: req.body.password
     })
-    .then(dbUserData => {
-        req.session.save(() => {
-            req.session.user_id = dbUserData.id,
-            req.session.login_id = dbUserData.login_id,
-            req.session.loggedIn = true;
-
-            res.json(dbUserData);
-        });
-    }
-    )
-    .catch(err => {
+    .then(dbUserData => {res.json(dbUserData)})
+        .catch(err => {
         console.log(err);
         res.status(500).json(err);
     }
