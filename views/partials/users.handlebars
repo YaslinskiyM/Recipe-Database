@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Home Cook</title>
+    <title id="homePageTitle">The Home Cook</title>
 </head>
-<body>
-    <h1>The Home Cook</h1>
-    <h3>If you have a login, please login below</h3>
+<body class="loginBody">
+    <h1 id="loginHeader">The Home Cook</h1>
+    <h3 id="loginMessage">If you have a login, please login below</h3>
 
-<form>
+<form id="loginForm">
   <input id='username' type="text" name="username" placeholder="Username"/>
   <input id='password' type="password" name="password" placeholder="Password"/>
   <button id="loginBtn">Login</button>
 </form>
-<h3>Don't have an account?</h3>
+<div class="otherOption">
+<h3 id="noAccount">Don't have an account?</h3>
 <button id="signupBtn">Sign-Up Here</button>
+</div>
+
 
 </body>
 </html>
