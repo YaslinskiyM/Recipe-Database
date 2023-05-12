@@ -7,7 +7,7 @@ const savedRoutes = require('./saved-routes');
 
 router.use('/users', userRoutes);
 router.use('/recipes', recipeRoutes);
-router.use('/favorites', favoriteRoutes);
+// router.use('/favorites', favoriteRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/saved', savedRoutes);
 module.exports = router;
