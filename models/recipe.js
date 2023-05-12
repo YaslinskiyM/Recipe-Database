@@ -36,11 +36,11 @@ Recipe.init(
             allowNull: false,
         },
         recipe_description: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(255),
             allowNull: true,
         },
         recipe_steps: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(255),
             allowNull: true,
         },
         comment: {

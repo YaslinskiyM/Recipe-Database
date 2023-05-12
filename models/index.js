@@ -18,33 +18,35 @@ Recipe.belongsTo(User, {
 
 // ====================================================
 
-Recipe.belongsToMany(Category, {
-    through: 'category_id',
-});
-
 Category.hasMany(Recipe, {
     foreignKey: 'category_id',
 });
 
-// ====================================================
+Recipe.belongsTo(Category, {
+    through: 'category_id',
+});
 
-User.belongsToMany(Recipe, {
-    through: 'favorite',
-    foreignKey: 'recipe_user_id',});
 
-Recipe.belongsToMany(User, {
-    through: 'favorite',
-    foreignKey: 'recipe_id',});
 
 // ====================================================
 
-User.belongsToMany(Recipe, {
-    through: 'saved',
-    foreignKey: 'recipe_user_id',});
+// User.belongsToMany(Recipe, {
+//     through: 'favorite',
+//     foreignKey: 'recipe_user_id',});
 
-Recipe.belongsToMany(User, {
-    through: 'saved',
-    foreignKey: 'recipe_id',});
+// Recipe.belongsToMany(User, {
+//     through: 'favorite',
+//     foreignKey: 'recipe_id',});
+
+// // ====================================================
+
+// User.belongsToMany(Recipe, {
+//     through: 'saved',
+//     foreignKey: 'recipe_user_id',});
+
+// Recipe.belongsToMany(User, {
+//     through: 'saved',
+//     foreignKey: 'recipe_id',});
 
 
 // ====================================================
