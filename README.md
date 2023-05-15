@@ -75,7 +75,6 @@ This would be suitable for food enthusiasts, home cooks, professional chefs, and
 @Kaylachin90
 @YaslinskiyM
 
-
 ## License
 ${renderLicenseSection(data.license)} 
 
