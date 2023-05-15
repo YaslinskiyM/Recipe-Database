@@ -9,6 +9,7 @@ $submitBtn.addEventListener('click', async (event) => {
     const username = $username.value;
     const password = $password.value;
   
+    console.log('username',username,password)
     if (!username || !password) {
       return alert('Hello,Username/password must be provided');
     }
@@ -30,7 +31,7 @@ $submitBtn.addEventListener('click', async (event) => {
 
   $signupBtn.addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default button behavior
-
+console.log('signup here cmoing')
     // Perform signup redirect logic
     window.location.href = '/signup';
 });
