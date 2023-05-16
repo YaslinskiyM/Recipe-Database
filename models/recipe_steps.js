@@ -26,7 +26,7 @@ Recipe_steps.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'recipe',
+        modelName: 'recipe_steps',
       }
 )
 
