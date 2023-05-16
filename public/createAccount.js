@@ -3,7 +3,7 @@ const $lastName= document.getElementById('lastName');
 const $email = document.getElementById('email');
 const $password= document.getElementById('password');
 const $confirmPassword= document.getElementById('confirmPassword');
-const submitBtn= 
+const $submitBtn= document.getElementById('submitBtn');
 
 $submitBtn.addEventListener('click', async(event)=> {
     event.preventDefault(); // Prevent the default form submission
