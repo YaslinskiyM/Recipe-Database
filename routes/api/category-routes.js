@@ -1,5 +1,5 @@
 const sequelize = require("sequelize");
-const { Category, Recipe, User } = require("../../models");
+const { Category, Recipe, User, Recipe_steps} = require("../../models");
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
@@ -12,19 +12,23 @@ router.get("/", (req, res) => {
 					"id",
 					"recipe_name",
 					"recipe_description",
-					"recipe_steps",
 					"comment",
 					"keywords",
 					"category_id",
 				],
-				include: {
-					model: User,
-					attributes: [
+				include: [
+					{model: User,
+					    attributes: [
 						"first_name",
                         "last_name",
-                        "id"
-					],
-				},
+                        "id"]},
+                    {
+                        model: Recipe_steps,
+                        attributes: ["id", "step"]
+                    }
+
+					
+                ],
 			},
 		]
 	}).
@@ -52,19 +56,24 @@ router.get("/:id", (req, res) => {
 					"id",
 					"recipe_name",
 					"recipe_description",
-					"recipe_steps",
 					"comment",
 					"keywords",
 					"category_id",
 				],
-				include: {
-					model: User,
-					attributes: [
+				include: [
+					{model: User,
+					    attributes: [
 						"first_name",
                         "last_name",
-                        "id"
-					],
-				},
+                        "id"]},
+                    {
+                        model: Recipe_steps,
+                        attributes: ["id", "step"]
+                    }
+
+					
+                ],
+
 			}
 
 		],

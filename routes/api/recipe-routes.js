@@ -4,7 +4,7 @@ const router =  require("express").Router();
 
 router.get("/", (req, res) => {
     Recipe.findAll({
-        attributes: ["id", "recipe_name", "recipe_description", "recipe_steps", "comment", "keywords"],
+        attributes: ["id", "recipe_name", "recipe_description", "comment", "keywords"],
         include: [
             {
                 model: Category,
@@ -33,7 +33,7 @@ router.get("/:id", (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ["id", "recipe_name", "recipe_description", "recipe_steps", "comment", "keywords"],
+        attributes: ["id", "recipe_name", "recipe_description", "comment", "keywords"],
         include: [
             {
                 model: Category,
