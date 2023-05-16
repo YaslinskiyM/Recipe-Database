@@ -5,7 +5,7 @@ const Favorite = require('./favorite');
 const Saved = require('./saved');
 const Recipe_steps = require('./recipe_steps');
 
-Recipe.haveMany(Recipe_steps, {
+Recipe.hasMany(Recipe_steps, {
     foreignKey: 'recipe_id',
 });
 
