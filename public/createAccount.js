@@ -5,7 +5,7 @@ const $password= document.getElementById('password');
 const $confirmPassword= document.getElementById('confirmPassword');
 const submitBtn= 
 
-$submitBtn.addEventListener('click', function(event) {
+$submitBtn.addEventListener('click', async(event)=> {
     event.preventDefault(); // Prevent the default form submission
 
     // Retrieve form input values
@@ -19,8 +19,36 @@ $submitBtn.addEventListener('click', function(event) {
     if (validateInput(firstName, lastName, email, password, passwordConfirm)) {
         //Display a success message
         alert('Account created successfully!');
+
+
         // Perform redirect or other actions
-        window.location.href = '/homePage'; // Redirect to login page
+     try {
+        const response = await fetch('/api/users/', {
+            method: 'POST',
+            body: JSON.stringify(firstName,lastName,email,password),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        if (response.ok) {
+            // Handle successful recipe creation
+            console.log('sucessfully created account')
+            window.location.href = '/home'; // Redirect to success page
+        } else {
+            // Handle error response
+            console.error('Failed to create recipe');
+        }
+
+        const data = await response.json();
+        console.log(data);
+
+
+    }
+    catch (error) {
+        console.error('Network error:', error);
+    }
+
+
     } else {
         // Display an error message
         alert('Invalid input. Please check your details.');

@@ -1,10 +1,11 @@
 const $username = document.getElementById('username');
 const $password = document.getElementById('password');
-const $submitBtn = document.getElementById('loginBtn');
+const $loginBtn = document.getElementById('loginBtn');
 const $signupBtn = document.getElementById('signupBtn');
 
 
-$submitBtn.addEventListener('click', async (event) => {
+$loginBtn.addEventListener('click', async (event) => {
+  console.log('username check')
     event.preventDefault();
     const username = $username.value;
     const password = $password.value;
@@ -13,20 +14,22 @@ $submitBtn.addEventListener('click', async (event) => {
     if (!username || !password) {
       return alert('Hello,Username/password must be provided');
     }
-  
     try {
-      const response = await fetch('/api/users/signin', {
+      const response = await fetch('/api/users/', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, password}),
+      
       });
       const data = await response.json();
+      console.log('data cming',response.body)
   
-      location.href = `/users/${data.id}`;
+     // location.href = `/users/${data.id}`;
   
     } catch (error) {
       alert(error);
     }
+
+    
   });
 
   $signupBtn.addEventListener('click', function(event) {
