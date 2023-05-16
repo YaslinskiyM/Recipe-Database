@@ -3,7 +3,7 @@ const{ User, Favorite, Saved } = require('../../models');
 
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['password'] }
+        order: ['last_name'],
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User.findOne({
-        attributes: { exclude: ['password'] },
         where: { id: req.params.id },
         // include: [
         //     {
@@ -43,19 +42,28 @@ router.get('/:id', (req, res) => {
     );
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { 
     User.create({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         login_id: req.body.login_id,
         password: req.body.password
     })
-    .then(dbUserData => {res.json(dbUserData)})
-        .catch(err => {
-        console.log(err);
+    .then(dbUserData => {
+        bcrypt.hash(req.body.password, 10)
+            .then(hashedPassword => {
+                console.log('Hashed password:', hashedPassword);
+                res.json(dbUserData);
+            })
+            .catch(err => {
+                console.log('Password hashing error:', err);
+                res.status(500).json(err);
+            });
+    })
+    .catch(err => {
+        console.log('User creation error:', err);
         res.status(500).json(err);
-    }
-    );
+    });
 });
 
 router.post('/login', (req, res) => {
