@@ -4,12 +4,12 @@ const recipeData =
     {
         "recipe_name": "Chicken Parmesan",
         "recipe_description": "Chicken Parmesan is a classic for a reason! Chicken cutlets, breaded and fried, smothered with tomato sauce, and covered with mozzarella and Parmesan cheeses are so good. Serve with pasta or on a roll.",
-        "recipe_steps": "1 Pound chicken breasts until thin: Place the chicken breast halves one at a time between sheets of plastic wrap or wax paper" /*. Pound with a meat pounder until they are thin and expanded to 2 to 3 times their original size. (Or you can use a slicing attachment on a food processor to slice the chicken breasts thin.)*/
+        "recipe_steps": "1. Pound chicken cutlets thin. 2. Dredge chicken in flour, dip in egg, then in breadcrumbs. 3. Fry chicken in oil until brown. 4. Top with tomato sauce and cheese and bake until cheese is melted. "
     },
     {
         "recipe_name": "Beef Stew",
         "recipe_description": "Hearty beef stew recipe with loads of tender beef, vegetables and a rich broth. This classic beef stew recipe is easy to make in one-pot.",
-        "recipe_steps": "1 Brown the beef: Pat dry the cubes of beef with paper towels. Heat 2 Tbsp of oil in a large sauté pan over medium high heat. " /*Working in batches so that the pan is not crowded, brown the meat on all sides. Transfer the browned meat to a large pot."*/
+        "recipe_steps": "1. Pat dry beef cubes. 2. Heat oil in large saute pan. 3. Brown meat. 4. Add vegetables and cook until tender. 5. Add beef broth and simmer for 1 hour. "
     },
     {
         "recipe_name": "Fish Tacos",
@@ -19,12 +19,12 @@ const recipeData =
     {
         "recipe_name": "Pork Chops",
         "recipe_description": "Pork chops cooked low and slow become so tender and juicy—and so do the cabbage and apples that cook with them. Serve with a cold beer and imagine yourself at a biergarten in Germany.",
-        "recipe_steps": "1 Brown the pork chops: Heat the olive oil in a large, thick-bottomed skillet over medium-high heat. Pat the pork chops dry with" /* paper towels. Sprinkle salt over the pork chops on both sides. When the oil is hot, swirl in the pan to coat the bottom and then add the pork chops. Brown them for 3-4 minutes on each side."*/
+        "recipe_steps": "1. Heat oiled skillet. 2. Add pork chops. 3. Cook pork chops 3-4 minutes per side until done. 4. Serve."
     },
     {
         "recipe_name": "Shrimp Scampi",
         "recipe_description": "Classic Shrimp Scampi Recipe with lemon, garlic, butter, olive oil, and lots of fresh parsley. Serve with pasta or rice.",
-        "recipe_steps": "1 Prep the shrimp: Peel and devein the shrimp. Rinse in cold water and drain. Place in a bowl with the olive oil, salt, pepper, and garlic and toss to combine. Cover and refrigerate until needed."
+        "recipe_steps": "1 Prep the shrimp: Peel and rinse in cold water. 2. Place in a bowl with the olive oil, salt, pepper, and garlic and toss to combine. Cover and refrigerate until needed."
     }
 ]
 
