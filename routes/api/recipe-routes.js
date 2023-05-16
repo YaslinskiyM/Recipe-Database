@@ -1,4 +1,4 @@
-const {Recipe, Category, User} = require("../../models");
+const {Recipe, Category, User,Recipe_steps} = require("../../models");
 const router =  require("express").Router();
 
 
@@ -13,7 +13,12 @@ router.get("/", (req, res) => {
             {
                 model: User,
                 attributes: ["id",  "first_name", "last_name"]
+            },
+            {
+                model: Recipe_steps,
+                attributes: ["id", "step"]
             }
+
         ]
     })
     .then(dbRecipeData => res.json(dbRecipeData))
@@ -37,6 +42,9 @@ router.get("/:id", (req, res) => {
             {
                 model: User,
                 attributes: ["id",  "first_name", "last_name"]
+            },{
+                model: Recipe_steps,
+                attributes: ["id", "step"]
             }
         ]
     })
