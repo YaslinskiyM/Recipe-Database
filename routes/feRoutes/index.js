@@ -19,11 +19,9 @@ router.get('/home', async (req, res) => {
 
 
 router.get('/signUp', async (req, res) => {
-    console.log('cming here0')
+    console.log('cming here2')
     res.render('login', {
       });
-
-
 });
 
 module.exports = router;

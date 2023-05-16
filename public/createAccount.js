@@ -23,7 +23,7 @@ $submitBtn.addEventListener('click', async(event)=> {
 
         // Perform redirect or other actions
      try {
-        const response = await fetch('/', {
+        const response = await fetch('/api/users/', {
             method: 'POST',
             body: JSON.stringify(firstName,lastName,email,password),
             headers: {

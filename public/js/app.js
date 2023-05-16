@@ -15,7 +15,7 @@ $loginBtn.addEventListener('click', async (event) => {
       return alert('Hello,Username/password must be provided');
     }
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch('/api/users/', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
       
