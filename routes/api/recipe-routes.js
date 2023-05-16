@@ -16,7 +16,8 @@ router.get("/", (req, res) => {
             },
             {
                 model: Recipe_steps,
-                attributes: ["id", "step"]
+                attributes: ["id", "step"],
+                order: ["id", "ASC"]
             }
 
         ]
@@ -44,7 +45,8 @@ router.get("/:id", (req, res) => {
                 attributes: ["id",  "first_name", "last_name"]
             },{
                 model: Recipe_steps,
-                attributes: ["id", "step"]
+                attributes: ["id", "step"],
+                order: ["id", "ASC"]
             }
         ]
     })

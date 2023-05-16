@@ -3,6 +3,7 @@ const seedUser = require('./user');
 const seedRecipe = require('./recipe');
 
 const sequelize = require('../config/connections');
+const seedRecipeSteps = require('./recipe_steps');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -11,10 +12,13 @@ const seedAll = async () => {
   console.log('\n----- CATEGORIES SEEDED -----\n');
 
   await seedUser();
-  console.log('\n----- PRODUCTS SEEDED -----\n');
+  console.log('\n----- User SEEDED -----\n');
 
   await seedRecipe();
-  console.log('\n----- TAGS SEEDED -----\n');
+  console.log('\n----- Recipe SEEDED -----\n');
+
+  await seedRecipeSteps();
+  console.log('\n----- Steps SEEDED -----\n');
 
   process.exit(0);
 };
