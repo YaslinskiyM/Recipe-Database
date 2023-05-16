@@ -1,8 +1,8 @@
 const sequelize = require("sequelize");
-const { Category, Recipe, User } = require("../../models");
+const { Category, Recipe, User, Recipe_steps} = require("../../models");
 const router = require("express").Router();
 
-router.get("/categories", (req, res) => {
+router.get("/", (req, res) => {
 	Category.findAll({
 		attributes: ["id", "category_name"],
 		include: [
@@ -12,31 +12,38 @@ router.get("/categories", (req, res) => {
 					"id",
 					"recipe_name",
 					"recipe_description",
-					"recipe_steps",
 					"comment",
 					"keywords",
 					"category_id",
 				],
-				include: {
-					model: User,
-					attributes: [
-						sequelize.fn(
-							"CONCAT",
-							sequelize.col("first_name"),
-							" ",
-							sequelize.col("last_name")
-						),
-					],
-				},
+				include: [
+					{model: User,
+					    attributes: [
+						"first_name",
+                        "last_name",
+                        "id"]},
+                    {
+                        model: Recipe_steps,
+                        attributes: ["id", "step"]
+                    }
+
+					
+                ],
 			},
-		],
-	});
+		]
+	}).
+    then((dbCategoryData) => res.json(dbCategoryData))
+    .catch((err) => {   
+        console.log(err);
+        res.status(500).json(err);
+    }
+    );
 });
 
 
 
 
-router.get("/categories/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     Category.findOne({
         where: {
             id: req.params.id,
@@ -49,41 +56,43 @@ router.get("/categories/:id", (req, res) => {
 					"id",
 					"recipe_name",
 					"recipe_description",
-					"recipe_steps",
 					"comment",
 					"keywords",
 					"category_id",
 				],
-				include: {
-					model: User,
-					attributes: [
-						sequelize.fn(
-							"CONCAT",
-							sequelize.col("first_name"),
-							" ",
-							sequelize.col("last_name")
-						),
-					],
-				},
+				include: [
+					{model: User,
+					    attributes: [
+						"first_name",
+                        "last_name",
+                        "id"]},
+                    {
+                        model: Recipe_steps,
+                        attributes: ["id", "step"]
+                    }
+
+					
+                ],
+
 			}
-            .then((dbCategoryData) => {
-                if (!dbCategoryData) {
-                    res.status(404).json({ message: "No category found with this id" });
-                    return;
-                } else {
-                    res.json(dbCategoryData);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                res.status(500).json(err);
-            }),
 
 		],
     })
+    .then((dbCategoryData) => {
+        if (!dbCategoryData) {
+            res.status(404).json({ message: "No category found with this id" });
+            return;
+        } else {
+            res.json(dbCategoryData);
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    })
 })
 
-router.post("/categories", (req, res) => {
+router.post("/", (req, res) => {
     Category.create({
         category_name: req.body.category_name,
     })
@@ -94,7 +103,7 @@ router.post("/categories", (req, res) => {
         });
 });
 
-router.put("/categories/:id", (req, res) => {
+router.put("/:id", (req, res) => {
     Category.update(req.body, {
         where: {
             id: req.params.id,
@@ -115,7 +124,7 @@ router.put("/categories/:id", (req, res) => {
 }
 );
 
-router.delete("/categories/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
     Category.destroy({
         where: {
             id: req.params.id,

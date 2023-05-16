@@ -36,11 +36,7 @@ Recipe.init(
             allowNull: false,
         },
         recipe_description: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        recipe_steps: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(255),
             allowNull: true,
         },
         comment: {
@@ -53,11 +49,11 @@ Recipe.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         category_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         }
 
     },

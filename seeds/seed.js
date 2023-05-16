@@ -1,24 +1,26 @@
-const sequelize = require('../config/connection');
-const { user, category, recipe } = require('../models'); //saved and favorite?
+const seedCategories = require('./category');
+const seedUser = require('./user');
+const seedRecipe = require('./recipe');
 
-const recipeSeedData = require('./recipe.json');
-const categorySeedData = require('./category.json');
-const userSeedData = require('./user.json');
+const sequelize = require('../config/connections');
+const seedRecipeSteps = require('./recipe_steps');
 
-const seedDatabase = async () => {
-    await sequelize.sync({ force: true });
-    
-    const users = await user.bulkCreate(userSeedData, {
-        returning: true,
-    });
-    
-    const categories = await category.bulkCreate(categorySeedData, {
-        returning: true,
-    });
-    
-    const recipes = await recipe.bulkCreate(recipeSeedData, {
-        returning: true,
-    });
-    
-    process.exit(0);
-    }
+const seedAll = async () => {
+  await sequelize.sync({ force: true });
+  console.log('\n----- DATABASE SYNCED -----\n');
+  await seedCategories();
+  console.log('\n----- CATEGORIES SEEDED -----\n');
+
+  await seedUser();
+  console.log('\n----- User SEEDED -----\n');
+
+  await seedRecipe();
+  console.log('\n----- Recipe SEEDED -----\n');
+
+  await seedRecipeSteps();
+  console.log('\n----- Steps SEEDED -----\n');
+
+  process.exit(0);
+};
+
+seedAll();
