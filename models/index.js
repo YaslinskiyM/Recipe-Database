@@ -3,7 +3,15 @@ const Recipe = require('./recipe');
 const User = require('./user');
 const Favorite = require('./favorite');
 const Saved = require('./saved');
+const Recipe_steps = require('./recipe_steps');
 
+Recipe.haveMany(Recipe_steps, {
+    foreignKey: 'recipe_id',
+});
+
+Recipe_steps.belongsTo(Recipe, {
+    foreignKey: 'recipe_id',
+});
 
 
 // ====================================================
@@ -50,4 +58,4 @@ Recipe.belongsTo(Category, {
 
 
 // ====================================================
-module.exports = { Category, Recipe, User, Favorite, Saved };
+module.exports = { Category, Recipe, User, Favorite, Saved,Recipe_steps};
