@@ -12,13 +12,10 @@ router.get('/users/:firstName/home', async (req, res) => {
   try {
     // Retrieve the user ID from the URL parameters
     const firstName = req.params.firstName;
-
-    // Fetch the user data based on the user ID
-   
-  
-
+    //const recipe = req.query.recipe;
+   // console.log('recipes in Route',req.query.recipe)
     // Render the user-specific home page and pass the user data to the template
-    res.render('homepage', { firstName });
+    res.render('homepage', { firstName});
 
   } catch (error) {
     console.log(error);

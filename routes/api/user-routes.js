@@ -1,16 +1,16 @@
 const router = require('express').Router();
-const{ User, Favorite, Saved } = require('../../models');
+const { User, Favorite, Saved } = require('../../models');
 
 router.get('/', (req, res) => {
     User.findAll({
         order: ['last_name'],
     })
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err);
-    }
-    );
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err);
+        }
+        );
 });
 
 router.get('/:id', (req, res) => {
@@ -27,76 +27,79 @@ router.get('/:id', (req, res) => {
         //     }
         // ]
     })
-    .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(404).json({ message: 'No user found with that id'});
-            return;
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with that id' });
+                return;
+            }
+            res.json(dbUserData);
         }
-        res.json(dbUserData);
-    }
-    )
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    }
-    );
+        )
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        );
 });
 
-router.post('/', (req, res) => { 
+router.post('/', (req, res) => {
     User.create({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         login_id: req.body.login_id,
         password: req.body.password
     })
-    .then(dbUserData => {
-        bcrypt.hash(req.body.password, 10)
-            .then(hashedPassword => {
-                console.log('Hashed password:', hashedPassword);
-                res.json(dbUserData);
-            })
-            .catch(err => {
-                console.log('Password hashing error:', err);
-                res.status(500).json(err);
-            });
-    })
-    .catch(err => {
-        console.log('User creation error:', err);
-        res.status(500).json(err);
-    });
+        .then(dbUserData => {
+            bcrypt.hash(req.body.password, 10)
+                .then(hashedPassword => {
+                    console.log('Hashed password:', hashedPassword);
+                    res.json(dbUserData);
+                })
+                .catch(err => {
+                    console.log('Password hashing error:', err);
+                    res.status(500).json(err);
+                });
+        })
+        .catch(err => {
+            console.log('User creation error:', err);
+            res.status(500).json(err);
+        });
 });
 
 
 router.post('/login', async (req, res) => {
-    console.log('cming hhhh',req.body)
     try {
-        const {username, password } = req.body;
-        console.log('cming hhhh login',username)
+        const { username, password } = req.body;
         login_id = username;
+        console.log('login_id',login_id)
         // Find the user based on the login_id
-        const user = await User.findOne({ where: { login_id } });
-    
+        const user = await User.findOne({ where: {login_id : login_id},
+            attributes: ["id",  "first_name", "last_name","login_id","password"]
+        }).then(dbUserData => res.json(dbUserData))
+       // const userData= dbUserDatajson()
+        //console.log('user',user)
+
         if (!user) {
-          // If user doesn't exist, return an error response
-          return res.status(400).json({ message: 'No user with that login id!' });
+            // If user doesn't exist, return an error response
+            return res.status(400).json({ message: 'No user with that login id!' });
         }
 
         // Check if the password is correct- we have to add here
-       
-       // we should fix the session issue
-      console.log('req.session',req.session)
+
+        // we should fix the session issue
+        
         // Set the session properties and save
-        req.session.user_id = user.id;
-        req.session.login_id = user.login_id;
+        req.session.id = user.id;
+        //req.session.login_id = user.login_id;
         req.session.loggedIn = true;
         req.session.save();
-    
+
         // Return a success response
         res.json({ user, message: 'You are now logged in!' });
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error' });
-      }
+    }
 });
 
 
@@ -117,38 +120,38 @@ router.put('/:id', (req, res) => {
         individualHooks: true,
         where: { id: req.params.id }
     })
-    .then(dbUserData => {
-        if (!dbUserData[0]) {
-            res.status(404).json({ message: 'No user found with that id'});
-            return;
+        .then(dbUserData => {
+            if (!dbUserData[0]) {
+                res.status(404).json({ message: 'No user found with that id' });
+                return;
+            }
+            res.json(dbUserData);
         }
-        res.json(dbUserData);
-    }
-    )
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    }
-    );
+        )
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        );
 });
 
 router.delete('/:id', (req, res) => {
     User.destroy({
         where: { id: req.params.id }
     })
-    .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(404).json({ message: 'No user found with that id'});
-            return;
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with that id' });
+                return;
+            }
+            res.json(dbUserData);
         }
-        res.json(dbUserData);
-    }
-    )
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    }
-    );
+        )
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        }
+        );
 });
 
 module.exports = router;
