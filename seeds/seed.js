@@ -2,7 +2,7 @@ const seedCategories = require('./category');
 const seedUser = require('./user');
 const seedRecipe = require('./recipe');
 
-const sequelize = require('../config/connections');
+const sequelize = require('../config/connection');
 const seedRecipeSteps = require('./recipe_steps');
 
 const seedAll = async () => {
