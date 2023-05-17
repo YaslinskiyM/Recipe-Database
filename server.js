@@ -21,7 +21,7 @@ const sess = {
   store: new SequelizeStore({
     db: sequelize,
   }),
-  id : 0,
+  value: 0
 };
 
 app.use(session(sess));
