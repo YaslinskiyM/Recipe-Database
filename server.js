@@ -9,7 +9,7 @@ const sequelize = require('./config/connections');
 const hbs = exphbs.create({
 });
 
-const hbs = exphbs.create();
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
