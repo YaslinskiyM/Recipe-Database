@@ -66,33 +66,39 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
-    User.findOne({
-        where: { login_id: req.body.login_id }
-    })
-    .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that login id!' });
-            return;
+
+router.post('/login', async (req, res) => {
+    console.log('cming hhhh',req.body)
+    try {
+        const {username, password } = req.body;
+        console.log('cming hhhh login',username)
+        login_id = username;
+        // Find the user based on the login_id
+        const user = await User.findOne({ where: { login_id } });
+    
+        if (!user) {
+          // If user doesn't exist, return an error response
+          return res.status(400).json({ message: 'No user with that login id!' });
         }
 
-        const validPassword = dbUserData.checkPassword(req.body.password);
-
-        if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password!'});
-            return;
-        }
-
-        req.session.save(() => {
-            req.session.user_id = dbUserData.id,
-            req.session.login_id = dbUserData.login_id,
-            req.session.loggedIn = true;
-
-            res.json({ user: dbUserData, message: 'You are now logged in!' });
-        });
-    }
-    );
+        // Check if the password is correct- we have to add here
+       
+       // we should fix the session issue
+      console.log('req.session',req.session)
+        // Set the session properties and save
+        req.session.user_id = user.id;
+        req.session.login_id = user.login_id;
+        req.session.loggedIn = true;
+        req.session.save();
+    
+        // Return a success response
+        res.json({ user, message: 'You are now logged in!' });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
 });
+
 
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
