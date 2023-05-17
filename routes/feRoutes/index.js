@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 router.get('/', async (req, res) => {
     console.log('cming here0')
-    res.render('users', {
+    res.render('homepage', {
       });
 
 
@@ -23,12 +23,12 @@ router.get('/users/:firstName/home', async (req, res) => {
   }
 })
 
-router.get('/signUp', async (req, res) => {
-    console.log('cming here2')
-    res.render('login', {
-      });
+router.get('/login', async (req, res) => {
+     res.render('login');
+});
 
-
+router.get('/signup', async (req, res) => {
+  res.render('signup');
 });
 
 module.exports = router;

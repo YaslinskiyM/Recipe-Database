@@ -9,7 +9,12 @@ const sequelize = require('./config/connections');
 const hbs = exphbs.create({
 });
 
-const hbs = exphbs.create();
+//process the cookie
+app.use(session({
+  secret: 'YourSecretKey',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,12 +29,7 @@ app.use(require('./routes'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-//process the cookie
-app.use(session({
-  secret: 'YourSecretKey',
-  resave: false,
-  saveUninitialized: false
-}));
+
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () =>  console.log(`App listening at http://localhost:${PORT} 🚀`));
