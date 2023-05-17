@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    position: absolute; top: 0;
+    font-size: 70px;
+    font-style: italic;
+    font: white;
+    border: 2px solid blue;
+    width: 80vw;
+    background-color: green;
+}
+
+.navbar {
+    font-size: 35px;
+    background-color: lightgreen;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../images/veggieBG.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid red;
+}
+
+
+
+
+.login {
+    width: 360px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.login h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.login form {
+    font-size: 20px;
+}
+
+.login form .form-group {
+    margin-bottom: 12px;
+}
+
+.login form input[type="submit"] {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+#otherOption{
+    width: 360px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    position: absolute; bottom: 50px;
+}
+
+.signupBtn {
+    background-color: green;
+
+}
+
+#card {
+    width:80vw;
+    border: 2px black solid;
+}
