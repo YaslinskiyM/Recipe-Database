@@ -15,16 +15,16 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
 	User.findOne({
 		where: { id: req.params.id },
-		// include: [
-		//     {
-		//         model: Favorite,
-		//         attributes: ['id', 'recipe_id', 'user_id'],
-		//         include: {
-		//             model: Saved,
-		//             attributes: ['id', 'recipe_id', 'user_id']
-		//         }
-		//     }
-		// ]
+		include: [
+		    {
+		        model: Favorite,
+		        attributes: ['id', 'recipe_id', 'user_id'],
+		        include: {
+		            model: Saved,
+		            attributes: ['id', 'recipe_id', 'user_id']
+		        }
+		    }
+		]
 	})
 		.then((dbUserData) => {
 			if (!dbUserData) {
@@ -85,9 +85,10 @@ router.post("/login", async (req, res) => {
             res.status(400).json({ message: "No user with that login id!" });
             return;
         }
-        
+        //console.log(user.id, ' user_id')
         req.session.save(() => {
-            req.session.id = user.id;
+            req.session.value = user.id;
+            //console.log(req.session.value, 'session_id')
             req.session.loggedIn = true;
             res.json({ user, message: "You are now logged in!" });
         });
