@@ -35,13 +35,6 @@ app.set('view engine', 'handlebars');
 
 app.use(require('./routes'));
 
-// process the cookie
-app.use(session({
-  secret: 'YourSecretKey',
-  resave: false,
-  saveUninitialized: false
-}));
-
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () =>  console.log(`App listening at http://localhost:${PORT} 🚀`));
 });

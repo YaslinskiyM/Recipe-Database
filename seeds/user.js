@@ -35,6 +35,9 @@ const userData =
 
 ]
 
-const seedUser = () => User.bulkCreate(userData);
+const seedUser = async () => await User.bulkCreate(userData, {
+    individualHooks: true,
+    returning: true,
+  });
 
 module.exports = seedUser;

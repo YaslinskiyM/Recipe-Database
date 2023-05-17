@@ -64,79 +64,41 @@ router.post("/", (req, res) => {
 		});
 });
 
-//fix the login issue
-router.post("/login", async (req, res) => {
-	try {
-		const { username, password } = req.body;
-		login_id = username;
-		console.log("login_id", login_id);
-		// Find the user based on the login_id
-		const user = await User.findOne({
-			where: { login_id: login_id },
-			attributes: [
-				"id",
-				"first_name",
-				"last_name",
-				"login_id",
-				"password",
-			],
-		})
-        if (!user) {
-            res.status(400).json({ message: "No user with that login id!" });
-            return;
-        }
-        //console.log(user.id, ' user_id')
-        req.session.save(() => {
-            req.session.value = user.id;
-            //console.log(req.session.value, 'session_id')
-            req.session.loggedIn = true;
-            res.json({ user, message: "You are now logged in!" });
-        });
-			// .then((dbUserData) => {
-            //     if (!dbUserData) {
-            //         res.status(400).json({ message: "No user with that login id!" });
-            //         return;
-            //     } else {
-            //         res.json(dbUserData)
-            //         console.log(dbUserData.id)
-            //         req.session.save(() => {
-            //             req.session.user_id = dbUserData.id;
-            //             req.session.loggedIn = true;})
-            //         res.json({ user, message: "You are now logged in!" });
-            //     }
-            // })
-			// .then((data) => {
-			// 	if (!data) {
-			// 		// If user doesn't exist, return an error response
-			// 		return res
-			// 			.status(400)
-			// 			.json({ message: "No user with that login id!" });
-			// 	} else {
-			// 		console.log(data);
-			// 		req.session.id = data.id;
-			// 		req.session.loggedIn = true;
-			// 		req.session.save();
-            //         
-			// 	}
-			// });
-		// const userData= dbUserDatajson()
-		//console.log('user',user)
 
-		// Check if the password is correct- we have to add here
 
-		// we should fix the session issue
-
-		// Set the session properties and save
-
-		//req.session.login_id = user.login_id;
-
-		// Return a success response
-		
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ message: "Internal server error" });
-	}
-});
+router.post('/login', async (req, res) => {
+    try {
+        console.log(req.body);
+      const userData = await User.findOne({ where: { login_id: req.body.login_id } });
+  
+      if (!userData) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password, please try again' });
+        return;
+      }
+  
+      const validPassword = await userData.checkPassword(req.body.password);
+  
+      if (!validPassword) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect username or password, please try again' });
+        return;
+      }
+  
+      req.session.save(() => {
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
+        
+        res.json({ user: userData, message: 'You are now logged in!' });
+      });
+  
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  });
+  
 
 router.post("/logout", (req, res) => {
 	if (req.session.loggedIn) {
