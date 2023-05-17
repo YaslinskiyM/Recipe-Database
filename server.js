@@ -5,10 +5,7 @@ const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sequelize = require('./config/connections');
-const hbs = exphbs.create({
-});
-
+const sequelize = require('./config/connection');
 const hbs = exphbs.create();
 
 app.use(express.json());
@@ -18,13 +15,9 @@ app.use(express.static('public'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-
 app.use(require('./routes'));
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
-//process the cookie
+// process the cookie
 app.use(session({
   secret: 'YourSecretKey',
   resave: false,
@@ -33,4 +26,4 @@ app.use(session({
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () =>  console.log(`App listening at http://localhost:${PORT} 🚀`));
-  });
+});
