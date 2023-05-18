@@ -1,35 +1,52 @@
-const $createRecipeForm = document.getElementById('createRecipeForm');
+const $createRecipeForm = document.getElementById('recipe');
+const $recipeName=document.getElementById('recipeDescription').value;
+const $recipeDescription=document.getElementById('recipeName').value;
+let selectedCategory;
+
+
+const e = document.getElementById("categoryOptions");
+
+function onChange() {
+
+    selectedCategory= e.options[e.selectedIndex].value;
+    
+    
+  }
+  e.onchange = onChange;
+ onChange();
+ 
+
 
 // form submission
 $createRecipeForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     // Collect the form data
-    const formData = new FormData(createRecipeForm);
-    const recipeData = Object.fromEntries(formData.entries());
+    
 
     // TODO add validation on the form data?
 
     // Send the recipe data to the server
     try {
-        const response = await fetch('/recipes', {
+        const response = await fetch('/api/recipes', {
             method: 'POST',
-            body: JSON.stringify(recipeData),
+            body: JSON.stringify({
+                recipe_name: $recipeName, 
+                recipe_description: $recipeDescription, 
+                category_id: selectedCategory
+            }),
             headers: {
                 'Content-Type': 'application/json',
             },
         })
         if (response.ok) {
             // Handle successful recipe creation
-            window.location.href = '/recipes/success'; // Redirect to success page
+            alert('recipe has been created')
+            document.location.replace('/')
         } else {
             // Handle error response
-            console.error('Failed to create recipe');
+            alert('Failed to create recipe');
         }
-
-        const data = await response.json();
-        console.log(data);
-
 
     }
     catch (error) {

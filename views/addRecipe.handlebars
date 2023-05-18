@@ -1,20 +1,32 @@
-<h2>
-    Let's see how you get down in the kitchen!
-</h2>
 <div id="recipeContainer">
 
-<form id="recipe">
+    <form id="recipe">
+        <h2>
+            Let's see how you get down in the kitchen!
+        </h2>
 
-<div id="titleRecipe" style="border: 2px green solid">
-<h3>Recipe Name:</h3>
-<input type="text" id="recipeName" name="recipeName">
+
+        <div>
+            <label for="recipeName">Recipe Name:</label>
+            <input type="text" id="recipeName" name="recipeName">
+        </div>
+        <div>
+            <label for="recipeDescription">Recipe Description:</label>
+            <textarea id="recipeDescription" name="recipeDescription"></textarea>
+        </div>
+        <form>
+            <select id="categoryOptions">
+                <option value="1" selected="selected">Chicken</option>
+                <option value="2">Beef</option>
+                <option value="3">Fish</option>
+                <option value="4">Pork</option>
+            </select>
+        </form>
+        <div>
+            <button type="submit">submit</button>
+
+        </div>
+
+    </form>
 </div>
-
-<label for="recipeName">Recipe Name:</label>
-<input type="text" id="recipeName" name="recipeName">
-
-<label for="recipeDescription">Recipe Name:</label>
-<input type="text" id="recipeDescription" name="recipeName">
-
-</form>
-</div>
+<script src="/js/addReciepe.js"></script>

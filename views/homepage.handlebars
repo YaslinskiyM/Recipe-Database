@@ -1,14 +1,26 @@
+<div class="container-fluid">
+<div class="row">
+  <div class="col-auto">
+   <h2 id="welcomePage">Welcome to the Recipe Homepage {{user.first_name}}!</h2>
+  </div>
+</div>
+</div>
 
-
-  <h2>Featured Recipes</h2>
+ {{#if recipes.length}}
+  <div class="col-md-6 recipe-list">
+    <h3>Featured Recipes </h3>
     <div id="featured-recipes"></div>
+    {{#each recipes as |recipe|}}
+       <ul>
+                <li>
+                    <h3>{{recipe_name}}</h3>
+                    <p>{{recipe_description}}</p>
+                </li>
+                </ul>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
 
-    <script id="featured-recipes-template" type="text/x-handlebars-template">
-        <ul>
-            {{#each recipes}}
-                <li>{{this}}</li>
-            {{/each}}
-        </ul>
-    </script>
-<script src="/public/homePage.js"></script>
+<script src="/js/homePage.js"></script>
 

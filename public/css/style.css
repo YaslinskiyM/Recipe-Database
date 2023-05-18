@@ -15,8 +15,14 @@ header{
 }
 
 .navbar {
-    font-size: 35px;
+    font-size: 25px;
     background-color: lightgreen;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+
 }
 
 body {
