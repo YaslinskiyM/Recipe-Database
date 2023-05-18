@@ -64,7 +64,10 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
-    Recipe.create(req.body)
+    Recipe.create({
+        ...req.body,
+      user_id: req.session.user_id,
+    })
     .then(dbRecipeData => res.json(dbRecipeData))
     .catch(err => {
         console.log(err);

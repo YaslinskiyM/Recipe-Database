@@ -88,7 +88,7 @@ router.post('/login', async (req, res) => {
       }
   
       req.session.save(() => {
-        req.session.user_id = userData.id;
+        req.session.value = userData.id
         req.session.logged_in = true;
         
         res.json({ user: userData, message: 'You are now logged in!' });
@@ -144,5 +144,6 @@ router.delete("/:id", (req, res) => {
 			res.status(500).json(err);
 		});
 });
+
 
 module.exports = router;

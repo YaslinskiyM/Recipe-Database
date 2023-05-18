@@ -1,14 +1,18 @@
 const router = require('express').Router();
+const { User, Recipe } = require("../../models");
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
     console.log('cming here0')
-    res.render('homepage', {
+    res.render('login', {
       });
 
 
 });
 
-router.get("/users/home", async (req, res) => {
+router.get("/users/home", withAuth, async (req, res) => {
+
+  console.log('cming users/home',req.body)
 	try {
 		/*
     using req.session.id to grab the user id from the session
@@ -19,25 +23,35 @@ router.get("/users/home", async (req, res) => {
 			attributes: { exclude: ["password"] },
 
 		});
-    //find all recipes create by user
+    // Serialize data so the template can read it
+    const user = data.get({ plain: true }); 
+
     const recipeData = await Recipe.findAll({
       where: {
         user_id: req.session.value
       }
     })
-    console.log(data)
-    console.log('recipeData',recipeData[0])
+ // Serialize data so the template can read it
+    const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
+    console.log(user)
+    console.log('recipeData',recipes)
 		// Retrieve the user ID from the URL parameters
 
 		//const recipe = req.query.recipe;
 		// console.log('recipes in Route',req.query.recipe)
 		// Render the user-specific home page and pass the user data to the template
-		res.render("homepage", { data , recipeData});
+		res.render("homepage", { user,recipes, logged_in: req.session.logged_in});
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ message: "Internal server error" });
 	}
 });
+
+router.get("/users/addRecipe", withAuth, async (req,res)=>{
+  console.log('cming for add recipe route')
+  res.render('addRecipe')
+})
+
 router.get('/login', async (req, res) => {
      res.render('login');
 });
