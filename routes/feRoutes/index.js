@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { User, Recipe } = require("../../models");
+const sequelize = require('../../config/connection');
+const { User, Recipe,Category, Recipe_steps} = require("../../models");
+const { increment } = require('../../models/categorys');
 const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -59,5 +61,58 @@ router.get('/login', async (req, res) => {
 router.get('/signup', async (req, res) => {
   res.render('signup');
 });
+
+router.get('/users/listCategory', async (req, res) => {
+  try {
+      const categoryData = await Category.findAll();
+      const categories = categoryData.map((category) => category.get({ plain: true }));
+      console.log(categories)
+      res.render('category', { categories });
+  } catch (err) {
+      res.status(500).json(err);
+      
+  }
+})
+
+router.get('/users/listCategory/:id', async (req, res) => {
+  try {
+      const recipeData = await Recipe.findAll({
+        where: {
+          category_id: req.params.id
+        }
+      });
+      const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
+      console.log(recipes)
+      res.render('recipes', { recipes }); 
+  } catch (err) {
+      res.status(500).json(err);
+  }})
+
+router.get(('/users/listCategory/getRecipe/:id'), async (req, res) => {
+  try {
+      const recipeData = await Recipe.findByPk(req.params.id, 
+        {include: [
+          {
+            model: User,
+            attributes: ['id', 'first_name', 'last_name'],
+          },
+          {
+            model: Category,
+            attributes: ['id', 'category_name'],
+          },
+          {
+            model: Recipe_steps,
+            attributes: ['id', 'step'],
+            order: ['id', 'ASC'],
+          },
+
+        ]});
+      const recipe = recipeData.get({ plain: true });
+      console.log(recipe, 'recipe')
+      res.render('thisrecipe',  recipe );
+  } catch (err) {
+      res.status(500).json(err);
+  }
+})
 
 module.exports = router;
