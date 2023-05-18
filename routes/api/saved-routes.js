@@ -3,7 +3,7 @@ const { User, Recipe, Category, Saved } = require('../../models');
 
 router.get('/', (req, res) => {
     Saved.findAll({
-        attributes: ['id', 'recipe_id', 'user_id'],
+        attributes: ['id', 'recipe_id', 'recipe_user_id'],
         include: [
             {
                 model: User,

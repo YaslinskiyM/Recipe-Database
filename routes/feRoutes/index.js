@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { User, Recipe,Category, Recipe_steps} = require("../../models");
+const { User, Recipe,Category, Recipe_steps, Saved, Favorite} = require("../../models");
 const { increment } = require('../../models/categorys');
 const withAuth = require('../../utils/auth');
 
@@ -114,5 +114,43 @@ router.get(('/users/listCategory/getRecipe/:id'), async (req, res) => {
       res.status(500).json(err);
   }
 })
+
+
+router.get('/users/saveFavorite'), async (req, res) => {
+  try {
+      const userSaved = await Saved.findAll({
+        where: {
+          user_id: req.session.value
+        },
+        include: [
+          {
+            model: Recipe,
+            attributes: ['id', 'recipe_name', 'ingredients', 'directions', 'category_id'],
+          },
+        ],
+      });
+      const saved = userSaved.map((saved) => saved.get({ plain: true }));
+      console.log(saved)
+
+
+      const userFav = await Favorite.findAll({
+        where: {
+          user_id: req.session.value
+        },
+        include: [
+          {
+            model: Recipe,
+            attributes: ['id', 'recipe_name', 'ingredients', 'directions', 'category_id'],
+          },
+        ],
+      });
+      const favorite = userFav.map((favorite) => favorite.get({ plain: true }));
+      console.log(favorite)
+      res.render('save_fav', { saved , favorite });
+  } catch (err) {
+      res.status(500).json(err);
+  }
+}
+
 
 module.exports = router;

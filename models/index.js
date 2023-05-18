@@ -38,23 +38,23 @@ Recipe.belongsTo(Category, {
 
 // ====================================================
 
-// User.belongsToMany(Recipe, {
-//     through: 'favorite',
-//     foreignKey: 'recipe_user_id',});
+User.belongsToMany(Recipe, {
+    through: 'favorite',
+    foreignKey: 'recipe_user_id',});
 
-// Recipe.belongsToMany(User, {
-//     through: 'favorite',
-//     foreignKey: 'recipe_id',});
+Recipe.belongsToMany(User, {
+    through: 'favorite',
+    foreignKey: 'recipe_id',});
 
-// // ====================================================
+// ====================================================
 
-// User.belongsToMany(Recipe, {
-//     through: 'saved',
-//     foreignKey: 'recipe_user_id',});
+User.belongsToMany(Recipe, {
+    through: 'saved',
+    foreignKey: 'recipe_user_id',});
 
-// Recipe.belongsToMany(User, {
-//     through: 'saved',
-//     foreignKey: 'recipe_id',});
+Recipe.belongsToMany(User, {
+    through: 'saved',
+    foreignKey: 'recipe_id',});
 
 
 // ====================================================

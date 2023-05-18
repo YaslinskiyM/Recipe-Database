@@ -1,0 +1,18 @@
+<!-- display all the saved and favorite recipe from user -->
+<div id="saved_fav">
+    <h2>Saved Recipes</h2>
+    {{#each saved}}
+        <div class="saved">
+            <h3>{{this.recipe_name}}</h3>
+            <button onClick='window.location.href = "/users/thisrecipe/{{this.id}}"'>View</button>
+            <button onClick='window.location.href = "/users/deleteSaved/{{this.id}}"'>Delete</button>
+        </div>
+    {{/each}}
+    <h2>Favorite Recipes</h2>
+    {{#each favorite}}
+        <div class="favorite">
+            <h3>{{this.recipe_name}}</h3>
+            <button onClick='window.location.href = "/users/thisrecipe/{{this.id}}"'>View</button>
+            <button onClick='window.location.href = "/users/deleteFavorite/{{this.id}}"'>Delete</button>
+        </div>
+    {{/each}}
