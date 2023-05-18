@@ -18,13 +18,22 @@ Favorite.init(
         autoIncrement: true,
     },
     recipe_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    }
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+          model: 'recipe',
+          key: 'id',
+      },
+  },
+  recipe_user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+          model: 'user',
+          key: 'id',
+      },
+      
+  }
   },
   {
     sequelize,
