@@ -96,24 +96,27 @@ router.put('/:id', (req, res) => {
 }
 );
 
-router.delete('/:id', (req, res) => {
-    Favorite.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(dbFavoriteData => {
-        if (!dbFavoriteData) {
-            res.status(404).json({ message: 'No favorite found with this id' });
-            return;
-        }
-        res.json(dbFavoriteData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-}
-);
+router.delete("/", (req, res) => {
+	console.log(req.session.value);
+	Favorite.destroy({
+		where: {
+			recipe_user_id: req.session.value,
+			recipe_id: req.body.id,
+		},
+	})
+		.then((dbSavedData) => {
+			if (!dbSavedData) {
+				res.status(404).json({
+					message: "No saved recipe found with this id",
+				});
+				return;
+			}
+			res.json(dbSavedData);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
+});
 
 module.exports = router;
