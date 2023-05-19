@@ -1,14 +1,13 @@
 <div class="container-fluid">
 <div class="row">
   <div class="col-auto">
-   <h2 id="welcomePage">Welcome to the Recipe Homepage {{user.first_name}}!</h2>
+   <h2 id="welcomePage">Welcome to the Your Recipe Homepage {{user.first_name}}!</h2>
   </div>
 </div>
 </div>
 
  {{#if recipes.length}}
   <div class="col-md-6 recipe-list">
-    <h3>Featured Recipes </h3>
     <div id="featured-recipes"></div>
     {{#each recipes as |recipe|}}
        <ul>

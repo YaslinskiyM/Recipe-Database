@@ -3,7 +3,7 @@ const router = require('express').Router();
 const { Category } = require("../../models");
 const withAuth = require('../../utils/auth');
 
-router.get('/users/listCategory', async (req, res) => {
+router.get('/users/listCategory',withAuth,async (req, res) => {
     try {
         const categoryData = await Category.findAll();
         const categories = categoryData.map((category) => category.get({ plain: true }));
