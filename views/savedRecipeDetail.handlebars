@@ -1,0 +1,11 @@
+<!-- display the detail of a recipe including the user's fullname and the category -->
+<div id="recipe">
+	<h1>{{recipe_name}}</h1>
+	<h3>By {{user.first_name}} {{user.last_name}}</h3>
+	<h3>Category: {{category.category_name}}</h3>
+	<p>{{recipe_description}}</p>
+	{{#each recipe_steps}}
+        <p>{{step}}</p>
+    {{/each}}
+    <button onClick='window.location.href = "/users/saveFavorite"'>return</button>
+</div>
