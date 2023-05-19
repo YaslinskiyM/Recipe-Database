@@ -25,12 +25,12 @@ const singnupFormHandler = async (event) => {
             alert('account created succesfully')
             document.location.replace('/users/home');
         } else {
-          alert('Failed to sign up.');
+          alert('Failed to sign up, password should be at least 8 characters long.');
         }
       }
 
       else{
-         alert('form validation failed')
+         alert('form validation failed, password should be at least 8 characters long.')
       }
 };
 
