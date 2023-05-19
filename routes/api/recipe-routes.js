@@ -64,11 +64,13 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
+    console.log('req recipe in API endpoint',req.body, req.session.value)
     Recipe.create({
         ...req.body,
-      user_id: req.session.user_id,
+      user_id: req.session.value,
     })
-    .then(dbRecipeData => res.json(dbRecipeData))
+    .then(dbRecipeData => {res.json(dbRecipeData),
+    console.log(dbRecipeData)})
     .catch(err => {
         console.log(err);
         res.status(500).json(err);

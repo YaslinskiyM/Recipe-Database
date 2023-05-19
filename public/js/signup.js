@@ -1,67 +1,49 @@
 const $firstName= document.getElementById('firstName');
 const $lastName= document.getElementById('lastName');
-const $email = document.getElementById('email');
+const $username = document.getElementById('username');
 const $password= document.getElementById('password');
-const $confirmPassword= document.getElementById('confirmPassword');
 const $submitBtn= document.getElementById('submitBtn');
 
-$submitBtn.addEventListener('click', async(event)=> {
+const singnupFormHandler = async (event) => {
     event.preventDefault(); // Prevent the default form submission
 
     // Retrieve form input values
-    var firstName = $firstName.value;
-    var lastName = $lastName.value;
-    var email = $email.value;
-    var password = $password.value;
-    var passwordConfirm = $confirmPassword.value;
+    var first_name = $firstName.value.trim();
+    var last_name = $lastName.value.trim();
+    var login_id = $username.value.trim();
+    var password = $password.value.trim();
 
-    // Perform signup logic
-    if (validateInput(firstName, lastName, email, password, passwordConfirm)) {
-        //Display a success message
-        alert('Account created successfully!');
-
-
-        // Perform redirect or other actions
-     try {
-        const response = await fetch('/api/users/', {
-            method: 'POST',
-            body: JSON.stringify(firstName,lastName,email,password),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+    if (validateInput(first_name, last_name, login_id, password)) {
+        console.log('cming inside');
+        const response = await fetch('/api/users', {
+          method: 'POST',
+          body: JSON.stringify({ first_name, last_name, login_id,password}),
+          headers: { 'Content-Type': 'application/json' },
+        });
         if (response.ok) {
-            // Handle successful recipe creation
-            console.log('sucessfully created account')
-            window.location.href = '/home'; // Redirect to success page
+            console.log('here',response.body)
+            alert('account created succesfully')
+            document.location.replace('/users/home');
         } else {
-            // Handle error response
-            console.error('Failed to create recipe');
+          alert('Failed to sign up.');
         }
+      }
 
-        const data = await response.json();
-        console.log(data);
+      else{
+         alert('form validation failed')
+      }
+};
 
-
-    }
-    catch (error) {
-        console.error('Network error:', error);
-    }
-
-
-    } else {
-        // Display an error message
-        alert('Invalid input. Please check your details.');
-    }
-});
-
-function validateInput(firstName, lastName, email, password, confirmPassword) {
+function validateInput(first_name, last_name, login_id, password) {
     // Perform validations on account creation fields
     return (
-        firstName.length > 0 &&
-        lastName.length > 0 &&
-        email.length > 0 &&
-        password.length > 0 &&
-        password === confirmPassword
+        first_name.length > 0 &&
+        last_name.length > 0 &&
+        login_id.length > 0 &&
+        password.length > 8
     );
 }
+
+document
+.getElementById('signUpForm')
+.addEventListener('submit', singnupFormHandler);
