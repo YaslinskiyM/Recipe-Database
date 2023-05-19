@@ -68,7 +68,7 @@ router.get("/signup", async (req, res) => {
 	res.render("signup");
 });
 
-router.get("/users/listCategory", async (req, res) => {
+router.get("/users/listCategory",withAuth, async (req, res) => {
 	try {
 		const categoryData = await Category.findAll();
 		const categories = categoryData.map((category) =>
@@ -81,7 +81,7 @@ router.get("/users/listCategory", async (req, res) => {
 	}
 });
 
-router.get("/users/listCategory/:id", async (req, res) => {
+router.get("/users/listCategory/:id",withAuth, async (req, res) => {
 	try {
 		const recipeData = await Recipe.findAll({
 			where: {
@@ -96,7 +96,7 @@ router.get("/users/listCategory/:id", async (req, res) => {
 	}
 });
 
-router.get("/users/listCategory/getRecipe/:id", async (req, res) => {
+router.get("/users/listCategory/getRecipe/:id",withAuth, async (req, res) => {
 	try {
 		const recipeData = await Recipe.findByPk(req.params.id, {
 			include: [
@@ -123,7 +123,7 @@ router.get("/users/listCategory/getRecipe/:id", async (req, res) => {
 	}
 });
 
-router.get("/users/saveFavorite", async (req, res) => {
+router.get("/users/saveFavorite",withAuth, async (req, res) => {
 	try {
 		
 		const recipeData = await Saved.findAll({
@@ -164,7 +164,7 @@ router.get("/users/saveFavorite", async (req, res) => {
 	}
 });
 
-router.get('/users/saveFavorite/:id', async (req, res) => {
+router.get('/users/saveFavorite/:id',withAuth, async (req, res) => {
   try {
     const recipeData = await Recipe.findByPk(req.params.id, {
       include: [
