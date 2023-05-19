@@ -1,12 +1,18 @@
-<h3 id="loginMessage">If you have a login, please login below</h3>
+<section id="login">
+<h3 id="loginMessage">Please login below</h3>
 
 <form id="loginForm">
-  <input id='username' type="text" name="username" placeholder="Username" />
+  <div id="loginForm">
+    <input id='username' type="text" name="username" placeholder="Username" />
   <input id='password' type="password" name="password" placeholder="Password" />
-  <button>Login</button>
+  </div>
+  
+  <button class="loginButton">Login</button>
 </form>
 <div class="otherOption">
   <h4 id="noAccount">Don't have an account?</h4>
-  <a href="/signup"><button>Sign up Here</button></a>
+  <a href="/signup"><button class="signUpButton">Sign up Here</button></a>
 </div>
 <script src="/js/login.js"></script>
+</section>
+
