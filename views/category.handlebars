@@ -1,0 +1,16 @@
+<!-- display list of categories -->
+<!-- each category is an clickable item 
+    that get specific detail of the category 
+    that uses category's id-->
+<div id="categories">
+	{{#each categories}}
+		<div class="category">
+			<a
+				class="categoryBtn"
+				data-id="{{id}}"
+				href="listCategory/{{id}}"
+			>{{id}}. {{category_name}}</a>
+		</div>
+	{{/each}}
+</div>
+<button onClick='window.location.href = "/users/home"'>home</button>

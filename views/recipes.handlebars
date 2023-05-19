@@ -1,0 +1,14 @@
+<!-- display all the recipes that was redered  -->
+<div id = 'recipelist'>
+    {{#each recipes}}
+    <div class="recipe">
+        <a class="recipeBtn" data-id="{{id}}" href="getRecipe/{{id}}">
+        <span>{{recipe_name}}</span><hr>
+        <span>{{recipe_description}}</span></a>
+        <hr style="fontweight: bold; color: #ff">
+    </div>
+    {{/each}}
+<button onClick='window.location.href = "/users/listCategory"'>Return
+		Category List</button>
+    <button onClick='window.location.href = "/users/home"'>home</button>
+</div>

@@ -3,7 +3,7 @@ const { User, Recipe, Category, Saved } = require('../../models');
 
 router.get('/', (req, res) => {
     Saved.findAll({
-        attributes: ['id', 'recipe_id', 'user_id'],
+        attributes: ['id', 'recipe_id', 'recipe_user_id'],
         include: [
             {
                 model: User,
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
             },
             {
                 model: Recipe,
-                attributes: ['id', 'recipe_name', 'recipe_description', 'recipe_steps', 'comment', 'keywords'],
+                attributes: ['id', 'recipe_name', 'recipe_description', 'comment', 'keywords'],
                 include: {
                     model: Category,
                     attributes: ['id', 'category_name']
@@ -103,9 +103,11 @@ router.put('/:id', (req, res) => {
 );
 
 router.delete('/:id', (req, res) => {
+    console.log(req.session.value)
     Saved.destroy({
         where: {
-            id: req.params.id
+            recipe_user_id: req.session.value,
+            recipe_id: req.params.id
         }
     })
     .then(dbSavedData => {
