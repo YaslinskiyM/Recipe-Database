@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Favorite, Saved } = require("../../models");
+const bcrypt = require('bcrypt');
 
 router.get("/", (req, res) => {
 	User.findAll({
@@ -49,9 +50,11 @@ router.post("/", (req, res) => {
 		.then((dbUserData) => {
 			bcrypt
 				.hash(req.body.password, 10)
-				.then((hashedPassword) => {
-					console.log("Hashed password:", hashedPassword);
-					res.json(dbUserData);
+				.then(() => {		
+					req.session.save(() => {
+						req.session.logged_in = true;
+					  });
+				  	res.json({ user: dbUserData, message: 'You are now logged in!' });
 				})
 				.catch((err) => {
 					console.log("Password hashing error:", err);
@@ -90,7 +93,7 @@ router.post('/login', async (req, res) => {
       req.session.save(() => {
         req.session.value = userData.id
         req.session.logged_in = true;
-        
+        console.log('userData in login',userData)
         res.json({ user: userData, message: 'You are now logged in!' });
       });
   
@@ -101,7 +104,7 @@ router.post('/login', async (req, res) => {
   
 
 router.post("/logout", (req, res) => {
-	if (req.session.loggedIn) {
+	if (req.session.logged_in) {
 		req.session.destroy(() => {
 			res.status(200).end();
 		});
