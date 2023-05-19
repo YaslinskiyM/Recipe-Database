@@ -4,7 +4,7 @@ const $featuredRecipesDiv = document.getElementById('featured-recipes');
 
 
 // search for reciepe and render results using handlebar template
-$searchEnterButton.addEventListener('click', function(event) {
+const search=async (event)=> {
  
     event.preventDefault();
     var searchRecipeTerm = searchRecipeInput.value.toLowerCase();
@@ -20,4 +20,6 @@ $searchEnterButton.addEventListener('click', function(event) {
 
     
       });
-  });
+  };
+
+  
