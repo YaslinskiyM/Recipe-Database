@@ -72,9 +72,30 @@ const recipe_stepsData =
         "step": "3. Fry chicken in oil until brown."
     },
     {
-        "recipe_id": 1,
-        "step": "4. Top with tomato sauce and cheese and bake until cheese is melted."
-    }
+        "recipe_id": 6,
+        "step": "1. Place the cooked shrimp in a serving glass or dish. Pour the cocktail sauce over the shrimp, coating them evenly."
+    },
+    {
+        "recipe_id": 6,
+        "step": "2.Garnish with fresh parsley or cilantro for added flavor and presentation."
+    },
+    {
+        "recipe_id": 6,
+        "step": "3. Serve immediately with lemon wedges and enjoy!"
+    },
+    {
+        "recipe_id": 7,
+        "step": "1. Cook chicken in a pan until browned and cooked through. Mix soy sauce, honey, rice vinegar, garlic, and ginger in a bowl."
+    },
+    {
+        "recipe_id": 7,
+        "step": "2. Pour the sauce over the cooked chicken. Cook for a few minutes until the sauce thickens and coats the chicken. "
+    },
+    {
+        "recipe_id": 7,
+        "step": "3. Garnish with sesame seeds and green onions. Serve with rice and enjoy!"
+    },
+
 ]
 
 const seedRecipeSteps = () => Recipe_steps.bulkCreate(recipe_stepsData);

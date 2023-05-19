@@ -9,9 +9,13 @@ header{
     font-size: 70px;
     font-style: italic;
     font: white;
-    border: 2px solid blue;
+    border: 2px solid darkgreen;
     width: 80vw;
-    background-color: green;
+    display: flex;
+    justify-content: center;
+    height: min-content;
+    background-color: lightgreen;
+    padding-top: 20px;
 }
 
 .navbar {
@@ -31,22 +35,44 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../../images/veggieBG.jpg");
+    background-image: url("../images/vegBG.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    border: 2px solid red;
 }
 
 
 
 
-.login {
-    width: 360px;
+
+#login {
+    width: 460px;
     height: min-content;
     padding: 20px;
     border-radius: 12px;
-    background: #ffffff;
+    background: lightgreen;
 }
+
+#loginMessage {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+#loginForm {
+    padding-bottom: 10px;
+}
+
+.loginButton:hover {
+    width: 70px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+.signUpButton:hover {
+    width: 100px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
 
 .login h1 {
     font-size: 36px;
@@ -80,7 +106,36 @@ body {
 
 }
 
+#signUpSection {
+    width: 460px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: lightgreen;
+    display: flex;
+    justify-content: center;
+}
+
+#signUp {
+    background: lightgreen;
+    border: 4px double;
+    display: flex;
+    justify-content: center;
+}
+
+.bottomSpacing {
+    padding-bottom: 10px;
+}
+
+
+
+
+
+
 #card {
     width:80vw;
     border: 2px black solid;
+    overflow-y:scroll;
 }
+
+
