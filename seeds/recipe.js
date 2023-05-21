@@ -33,20 +33,20 @@ const recipeData =
         "recipe_name": "Shrimp Scampi",
         "recipe_description": "Classic Shrimp Scampi Recipe with lemon, garlic, butter, olive oil, and lots of fresh parsley. Serve with pasta or rice.",
         "user_id" : "1",
-        "category_id": "5"
+        "category_id": "3"
     },
 
     {
         "recipe_name": "Shrimp Cocktail",
         "recipe_description": " Quick, tangy appetizer with cooked shrimp and zesty cocktail sauce.",
         "user_id" : "2",
-        "category_id": "6"
+        "category_id": "3"
     },
     {
         "recipe_name": "Teriyaki Chicken",
         "recipe_description": "Sweet and savory chicken glazed with a homemade teriyaki sauce, served with steamed rice and vegetables.",
         "user_id" : "2",
-        "category_id": "7"
+        "category_id": "1"
     },
 ]
 

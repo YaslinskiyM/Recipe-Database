@@ -68,35 +68,160 @@ router.get("/signup", async (req, res) => {
 	res.render("signup");
 });
 
-router.get("/users/listCategory",withAuth, async (req, res) => {
+router.get("/users/listCategory", withAuth, async (req, res) => {
 	try {
 		const categoryData = await Category.findAll();
 		const categories = categoryData.map((category) =>
 			category.get({ plain: true })
 		);
+		categories.push({ id: 0, category_name: "All" });
 		console.log(categories);
+
 		res.render("category", { categories });
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
 
-router.get("/users/listCategory/:id",withAuth, async (req, res) => {
+router.get("/users/listCategory/:id", withAuth, async (req, res) => {
 	try {
-		const recipeData = await Recipe.findAll({
+		
+			
+
+			let recipeData = await Recipe.findAll({
+				where: {
+					category_id: req.params.id,
+				},
+			});
+			let recipes = recipeData.map((recipe) =>
+				recipe.get({ plain: true })
+			);
+			console.log(recipes, 'test');
+
+			if (recipes.length === 0) {
+				console.log('idnull');
+			 	recipeData = await Recipe.findAll();
+				 recipes = recipeData.map((recipe) =>
+					recipe.get({ plain: true })
+				);
+				console.log(recipes);
+				
+			}
+
+			res.render("recipes", { recipes });
+
+			
+			
+			
+			// res.render("recipes", { recipes });
+		
+
+		
+	} catch (err) {
+		res.status(500).json(err);
+		console.log(err);
+
+	}
+});
+
+router.get("/users/listCategory/getRecipe/:id", withAuth, async (req, res) => {
+	try {
+		const recipeData = await Recipe.findByPk(req.params.id, {
+			include: [
+				{
+					model: User,
+					attributes: ["id", "first_name", "last_name"],
+				},
+				{
+					model: Category,
+					attributes: ["id", "category_name"],
+				},
+				{
+					model: Recipe_steps,
+					attributes: ["id", "step"],
+					order: ["id", "ASC"],
+				},
+			],
+		});
+
+		//find the if the user have saved or favorite the recipe
+
+		const recipe = recipeData.get({ plain: true });
+		//console.log(recipe, "recipe");
+		// check if user have saved or favorite the recipe
+		const savedData = await Saved.findOne({
 			where: {
-				category_id: req.params.id,
+				recipe_id: req.params.id,
+				recipe_user_id: req.session.value,
 			},
 		});
-		const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
-		console.log(recipes);
-		res.render("recipes", { recipes });
+		const favoriteData = await Favorite.findOne({
+			where: {
+				recipe_id: req.params.id,
+				recipe_user_id: req.session.value,
+			},
+		});
+		//console.log(savedData, "savedData");
+		//console.log(favoriteData, "favoriteData");
+		if (savedData) {
+			recipe.saved = true;
+		} else {
+			recipe.saved = false;
+		}
+		if (favoriteData) {
+			recipe.favorite = true;
+		} else {
+			recipe.favorite = false;
+		}
+		console.log(recipe, "recipe");
+
+		res.render("thisrecipe", recipe);
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
 
-router.get("/users/listCategory/getRecipe/:id",withAuth, async (req, res) => {
+router.get("/users/saveFavorite", withAuth, async (req, res) => {
+	try {
+		const recipeData = await Saved.findAll({
+			where: {
+				recipe_user_id: req.session.value,
+			},
+			include: {
+				model: Recipe,
+			},
+		});
+		const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
+		//console.log(recipes);
+		//combine the recipes into a single array
+		//console.log(recipes[0].saveds)
+		const savedRecipe = recipes.map((recipe) => recipe.recipe);
+		console.log(savedRecipe);
+
+		//======================================================================================================
+		const favData = await Favorite.findAll({
+			where: {
+				recipe_user_id: req.session.value,
+			},
+			include: {
+				model: Recipe,
+			},
+		});
+
+		const fav = favData.map((recipe) => recipe.get({ plain: true }));
+		//console.log(recipes);
+		//combine the recipes into a single array
+		//console.log(recipes[0].saveds)
+		const favRecipe = fav.map((recipe) => recipe.recipe);
+		console.log(favRecipe);
+		res.render("save_fav", { savedRecipe, favRecipe });
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
+router.get("/users/saveFavorite/:id", withAuth, async (req, res) => {
 	try {
 		const recipeData = await Recipe.findByPk(req.params.id, {
 			include: [
@@ -117,81 +242,10 @@ router.get("/users/listCategory/getRecipe/:id",withAuth, async (req, res) => {
 		});
 		const recipe = recipeData.get({ plain: true });
 		console.log(recipe, "recipe");
-		res.render("thisrecipe", recipe);
+		res.render("savedRecipeDetail", recipe);
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
-
-router.get("/users/saveFavorite",withAuth, async (req, res) => {
-	try {
-		
-		const recipeData = await Saved.findAll({
-      where:{
-        recipe_user_id: req.session.value
-      },
-        include: {
-          model: Recipe 
-        }
-    })
-		const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
-		//console.log(recipes);
-    //combine the recipes into a single array
-    //console.log(recipes[0].saveds)
-    const savedRecipe = recipes.map((recipe) => recipe.recipe)
-    console.log(savedRecipe)
-
-//======================================================================================================
-    const favData = await Favorite.findAll({
-      where:{
-        recipe_user_id: req.session.value
-      },
-        include: {
-          model: Recipe 
-        }
-    })
-
-		const fav = favData.map((recipe) => recipe.get({ plain: true }));
-		//console.log(recipes);
-    //combine the recipes into a single array
-    //console.log(recipes[0].saveds)
-    const favRecipe = fav.map((recipe) => recipe.recipe)
-    console.log(favRecipe)
-		res.render("save_fav", { savedRecipe, favRecipe});
-	} catch (err) {
-		console.log(err);
-		res.status(500).json(err);
-	}
-});
-
-router.get('/users/saveFavorite/:id',withAuth, async (req, res) => {
-  try {
-    const recipeData = await Recipe.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['id', 'first_name', 'last_name'],
-        },
-        {
-          model: Category,
-          attributes: ['id', 'category_name'],
-        },
-        {
-          model: Recipe_steps,
-          attributes: ['id', 'step'],
-          order: ['id', 'ASC'],
-        },
-      ],
-    });
-    const recipe = recipeData.get({ plain: true });
-    console.log(recipe, 'recipe');
-    res.render('savedRecipeDetail', recipe);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-
-
 
 module.exports = router;

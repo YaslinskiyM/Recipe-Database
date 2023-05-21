@@ -78,7 +78,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
 	Saved.create({
 		recipe_id: req.body.recipe_id,
-		user_id: req.session.user_id,
+		recipe_user_id: req.session.value,
 	})
 		.then((dbSavedData) => res.json(dbSavedData))
 		.catch((err) => {

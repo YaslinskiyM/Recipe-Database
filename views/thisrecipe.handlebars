@@ -11,4 +11,17 @@
 	<button onClick='window.location.href = "/users/listCategory"'>Return
 		Category List</button>
     <button onClick='window.location.href = "/users/home"'>home</button>
+	<!-- add a button that disable when user is already saved the recipe -->
+	{{#if saved}}
+	<button id="save" disabled>Save</button>
+	{{else}}
+	<button id="save" value = '{{id}}'>Save</button>
+	{{/if}}
+	{{#if favorite}}
+	<button id="favorite" disabled>Favorite</button>
+	{{else}}
+	<button id="favorite" value = '{{id}}'>Favorite</button>
+	{{/if}}
+	
 </div>
+<script src = '/js/categoryRecipe.js'></script>

@@ -66,7 +66,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Favorite.create({
         recipe_id: req.body.recipe_id,
-        user_id: req.body.user_id
+        recipe_user_id: req.session.value
     })
     .then(dbFavoriteData => res.json(dbFavoriteData))
     .catch(err => {
