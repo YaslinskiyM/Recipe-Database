@@ -10,6 +10,13 @@ const sequelize = require('./config/connection');
 const hbs = exphbs.create({
 });
 
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'mysql',
+});
+
+
 const sess = {
   secret: 'Super secret secret',
   cookie: {
