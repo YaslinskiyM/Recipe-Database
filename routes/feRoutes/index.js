@@ -16,6 +16,18 @@ router.get("/", async (req, res) => {
 	res.render("login", {});
 });
 
+router.get("/users/profile",withAuth, async (req, res) => {
+	try {
+    const data = await User.findByPk(req.session.value);
+		// Serialize data 
+		const user = data.get({ plain: true });
+    req.session.password = user.password;
+		res.render("userProfile", { user });
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
 router.get("/users/home", withAuth, async (req, res) => {
 	console.log("cming users/home", req.body);
 	try {
@@ -70,11 +82,13 @@ router.get("/signup", async (req, res) => {
 router.get("/users/listCategory",withAuth, async (req, res) => {
 	try {
 		const categoryData = await Category.findAll();
-		const categories = categoryData.map((category) =>
+		const category = categoryData.map((category) =>
 			category.get({ plain: true })
 		);
-		categories.push({ id: 0, category_name: "All" });
+		// category.push({ id: 0, category_name: "All" });
+		const categories = [{ id: 0, category_name: "All" }, ...category]
 		console.log(categories);
+	
 
 		res.render("category", { categories });
 	} catch (err) {
