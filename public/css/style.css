@@ -129,13 +129,103 @@ body {
 
 
 
-
-
-
 #card {
     width:80vw;
     border: 2px black solid;
     overflow-y:scroll;
 }
 
+#navContainer {
+    border: 2px solid green;
+}
 
+#searchBar {
+    padding-right: 40px;
+}
+
+#innerTextContainer {
+    font-size: 30px;
+    padding-left: 40px;
+}
+
+#logout:hover {
+    display: inline-block;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+    
+}
+
+#selectNav :hover {
+background-color:chartreuse;
+}
+
+#recipe {
+    width: 460px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: lightgreen;
+   
+}
+
+#recipeNameContainer {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+#rescipeDescriptionContainer {
+    display: flex;
+    justify-content: center;
+    padding-right: 40px;
+    padding-bottom: 20px;
+
+}
+
+#categoryOptionsSpacing {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+
+
+}
+
+#recipeSubmit:hover {
+    display: flex;
+    justify-content: center;
+  padding: 5px 5px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 9px #999;
+}
+
+#updateForm {
+    width: 460px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background: lightgreen;
+    
+}
+
+.centerForm {
+    display: flex;
+    justify-content: center;
+
+}

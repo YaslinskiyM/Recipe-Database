@@ -1,36 +1,38 @@
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+    <nav id="navContainer" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div id="innerTextContainer" class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="border: 2px solid green; width: 65%; justify-content: space-around">
-        <li class="nav-item">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="justify-content: space-around">
+        <li id="selectNav" class="nav-item">
           <a class="nav-link active" id="home" aria-current="page" href="/users/home">Home</a>
         </li>
-        <li class="nav-item">
+        <li id="selectNav" class="nav-item">
           <a class="nav-link active" id="addRecipe" aria-current="page" href="/users/addRecipe">Add Recipe</a>
         </li>
-        <li class="nav-item">
+        <li id="selectNav" class="nav-item">
           <a class="nav-link active" id="listCategory" aria-current="page" href="/users/listCategory">Categories</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/saveFavorite">Saved/Favorite Recipes</a>
+        <li id="selectNav" class="nav-item">
+          <a class="nav-link" href="/users/saveFavorite" style="color:black">Saved/Favorite Recipes</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="/users/profile">Profile</a>
+         <li id="selectNav" class="nav-item">
+          <a class="nav-link" href="/users/profile" style="color:black">Profile</a>
         </li>
       </ul>
 </div>
-        
 
  </div>
-      <form class="d-flex" style="height: 75px">
+      <form id="searchBar" class="d-flex" style="height: 75px">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
-      <button id="logout" class="btn-no-style">Logout</button>
+      <div id="logout">
+<button class="btn-no-style">Logout</button>
+      </div>
+      
   </div>
 </nav>
  <script src="/js/logout.js"></script>
