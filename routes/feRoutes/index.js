@@ -23,7 +23,6 @@ router.get("/users/home", withAuth, async (req, res) => {
     using req.session.id to grab the user id from the session
     then using that id to find the user in the database
     */
-		console.log("req.session.id", req.session.value);
 		const data = await User.findByPk(req.session.value, {
 			attributes: { exclude: ["password"] },
 		});
@@ -68,7 +67,7 @@ router.get("/signup", async (req, res) => {
 	res.render("signup");
 });
 
-router.get("/users/listCategory", withAuth, async (req, res) => {
+router.get("/users/listCategory",withAuth, async (req, res) => {
 	try {
 		const categoryData = await Category.findAll();
 		const categories = categoryData.map((category) =>
@@ -247,5 +246,8 @@ router.get("/users/saveFavorite/:id", withAuth, async (req, res) => {
 		res.status(500).json(err);
 	}
 });
+
+
+
 
 module.exports = router;
