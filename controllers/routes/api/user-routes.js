@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Favorite, Saved } = require("../../models");
+const { User, Favorite, Saved } = require("../../../models");
 const bcrypt = require('bcrypt');
 
 router.get("/", (req, res) => {
@@ -71,7 +71,7 @@ router.post("/", (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
       const userData = await User.findOne({ where: { login_id: req.body.login_id } });
   
       if (!userData) {
@@ -93,7 +93,7 @@ router.post('/login', async (req, res) => {
       req.session.save(() => {
         req.session.value = userData.id
         req.session.logged_in = true;
-        console.log('userData in login',userData)
+        // console.log('userData in login',userData)
         res.json({ user: userData, message: 'You are now logged in!' });
       });
   
@@ -114,7 +114,7 @@ router.post("/logout", (req, res) => {
 });
 
 router.put("/", (req, res) => {
-    console.log('req',req.body)
+    // console.log('req',req.body)
     User.update(req.body, {
         individualHooks: true,
         where: { id: req.session.value },

@@ -1,5 +1,5 @@
 const sequelize = require("sequelize");
-const { Category, Recipe, User, Recipe_steps} = require("../../models");
+const { Category, Recipe, User, Recipe_steps} = require("../../../models");
 const router = require("express").Router();
 
 router.get("/", (req, res) => {

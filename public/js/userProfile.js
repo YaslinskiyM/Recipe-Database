@@ -19,7 +19,7 @@ passwordInput.addEventListener('input', () => {
 
 
 const updateAccountFormHandler = async (event) => {
-  console.log('cming here inside event')
+  // console.log('cming here inside event')
 
   // Prevent form submission for demonstration purposes
   event.preventDefault();
@@ -28,7 +28,7 @@ const updateAccountFormHandler = async (event) => {
   const login_id = usernameInput.value;
   const password = passwordInput.value;
 
-  console.log('chk',login_id,password)
+  // console.log('chk',login_id,password)
   // Add your code to update the user account details
   if (login_id || password) {
 

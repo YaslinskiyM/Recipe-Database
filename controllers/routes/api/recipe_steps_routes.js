@@ -1,4 +1,4 @@
-const {Recipe_steps}= require('../../models');
+const {Recipe_steps}= require('../../../models');
 const router = require('express').Router();
 
 router.post('/', async (req, res) => {

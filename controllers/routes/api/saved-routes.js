@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Recipe, Category, Saved } = require("../../models");
+const { User, Recipe, Category, Saved } = require("../../../models");
 
 router.get("/", (req, res) => {
 	Saved.findAll({
@@ -114,7 +114,7 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/", (req, res) => {
-	console.log(req.session.value);
+	// console.log(req.session.value);
 	Saved.destroy({
 		where: {
 			recipe_user_id: req.session.value,

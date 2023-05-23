@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const sequelize = require("../../config/connection");
+const sequelize = require("../../../config/connection");
 const {
 	User,
 	Recipe,
@@ -7,12 +7,12 @@ const {
 	Recipe_steps,
 	Saved,
 	Favorite,
-} = require("../../models");
-const { increment } = require("../../models/categorys");
-const withAuth = require("../../utils/auth");
+} = require("../../../models");
+const { increment } = require("../../../models/categorys");
+const withAuth = require("../../../utils/auth");
 
 router.get("/", async (req, res) => {
-	console.log("cming here0");
+	// console.log("cming here0");
 	res.render("login", {});
 });
 
@@ -29,7 +29,7 @@ router.get("/users/profile",withAuth, async (req, res) => {
 });
 
 router.get("/users/home", withAuth, async (req, res) => {
-	console.log("cming users/home", req.body);
+	// console.log("cming users/home", req.body);
 	try {
 		/*
     using req.session.id to grab the user id from the session
@@ -48,8 +48,8 @@ router.get("/users/home", withAuth, async (req, res) => {
 		});
 		// Serialize data so the template can read it
 		const recipes = recipeData.map((recipe) => recipe.get({ plain: true }));
-		console.log(user);
-		console.log("recipeData", recipes);
+		// console.log(user);
+		// console.log("recipeData", recipes);
 		// Retrieve the user ID from the URL parameters
 
 		//const recipe = req.query.recipe;
@@ -59,7 +59,7 @@ router.get("/users/home", withAuth, async (req, res) => {
 			user,
 			recipes,
 			logged_in: req.session.logged_in,
-		});
+		 });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ message: "Internal server error" });
@@ -67,7 +67,7 @@ router.get("/users/home", withAuth, async (req, res) => {
 });
 
 router.get("/users/addRecipe", withAuth, async (req, res) => {
-	console.log("cming for add recipe route");
+	// console.log("cming for add recipe route");
 	res.render("addRecipe");
 });
 
@@ -87,7 +87,7 @@ router.get("/users/listCategory",withAuth, async (req, res) => {
 		);
 		// category.push({ id: 0, category_name: "All" });
 		const categories = [{ id: 0, category_name: "All" }, ...category]
-		console.log(categories);
+		// console.log(categories);
 	
 
 		res.render("category", { categories });
@@ -109,7 +109,7 @@ router.get("/users/listCategory/:id", withAuth, async (req, res) => {
 			let recipes = recipeData.map((recipe) =>
 				recipe.get({ plain: true })
 			);
-			console.log(recipes, 'test');
+			// console.log(recipes, 'test');
 
 			if (recipes.length === 0 && req.params.id <= 0) {
 				console.log('idnull');
@@ -117,7 +117,7 @@ router.get("/users/listCategory/:id", withAuth, async (req, res) => {
 				 recipes = recipeData.map((recipe) =>
 					recipe.get({ plain: true })
 				);
-				console.log(recipes);
+				// console.log(recipes);
 				
 			}
 
@@ -186,7 +186,7 @@ router.get("/users/listCategory/getRecipe/:id", withAuth, async (req, res) => {
 		} else {
 			recipe.favorite = false;
 		}
-		console.log(recipe, "recipe");
+		// console.log(recipe, "recipe");
 
 		res.render("thisrecipe", recipe);
 	} catch (err) {
@@ -209,7 +209,7 @@ router.get("/users/saveFavorite", withAuth, async (req, res) => {
 		//combine the recipes into a single array
 		//console.log(recipes[0].saveds)
 		const savedRecipe = recipes.map((recipe) => recipe.recipe);
-		console.log(savedRecipe);
+		// console.log(savedRecipe);
 
 		//======================================================================================================
 		const favData = await Favorite.findAll({
@@ -226,7 +226,7 @@ router.get("/users/saveFavorite", withAuth, async (req, res) => {
 		//combine the recipes into a single array
 		//console.log(recipes[0].saveds)
 		const favRecipe = fav.map((recipe) => recipe.recipe);
-		console.log(favRecipe);
+		// console.log(favRecipe);
 		res.render("save_fav", { savedRecipe, favRecipe });
 	} catch (err) {
 		console.log(err);
@@ -254,7 +254,7 @@ router.get("/users/saveFavorite/:id", withAuth, async (req, res) => {
 			],
 		});
 		const recipe = recipeData.get({ plain: true });
-		console.log(recipe, "recipe");
+		// console.log(recipe, "recipe");
 		res.render("savedRecipeDetail", recipe);
 	} catch (err) {
 		res.status(500).json(err);

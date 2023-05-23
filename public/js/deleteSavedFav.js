@@ -1,7 +1,7 @@
 const deleteFavorite = document.querySelectorAll(".deleteFavorite");
 const deleteSaved = document.querySelectorAll(".deleteSave");
-console.log(deleteFavorite);
-console.log(deleteSaved);
+// console.log(deleteFavorite);
+// console.log(deleteSaved);
 
 
 if(deleteSaved){

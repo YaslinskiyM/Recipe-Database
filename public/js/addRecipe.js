@@ -16,9 +16,9 @@ const addRecipeFormHandler = async (event) => {
 		.value.trim();
 	const category_id = selectedCategory;
 	const recipe_steps = combineSteps();
-	console.log(category_id);
+	// console.log(category_id);
 
-	console.log(recipe_name, recipe_description);
+	// console.log(recipe_name, recipe_description);
 	// Send the recipe data to the server
 	try {
 		const response = await fetch("/api/recipes", {
@@ -44,7 +44,7 @@ const addRecipeFormHandler = async (event) => {
 			}
 		);
 		const arr = await recipe_id.json();
-		console.log(arr);
+		// console.log(arr);
 		//use the id to create recipe steps\
 		try {
 			for (let i = 0; i < recipe_steps.length; i++) {
@@ -65,7 +65,7 @@ const addRecipeFormHandler = async (event) => {
 			alert("Steps has been created");
 		}
 
-		console.log(response);
+		// console.log(response);
 		if (response.ok) {
 			// Handle successful recipe creation
 			alert("Recipe has been created");
@@ -88,7 +88,7 @@ const addStep = document.getElementById("addStep");
 addStep.addEventListener("click", function (event) {
 	event.preventDefault();
 	const steps = document.getElementById("recipeSteps");
-	console.log(steps);
+	// console.log(steps);
 	steps.innerHTML += `<textarea class = 'recipeSteps' maxlength="255" required style="width:190px;"></textarea>`;
 });
 

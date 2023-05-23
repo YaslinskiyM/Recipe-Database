@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Recipe, Category, Favorite } = require('../../models');
+const { User, Recipe, Category, Favorite } = require('../../../models');
 
 
 router.get('/', (req, res) => {
@@ -97,7 +97,7 @@ router.put('/:id', (req, res) => {
 );
 
 router.delete("/", (req, res) => {
-	console.log(req.session.value);
+	// console.log(req.session.value);
 	Favorite.destroy({
 		where: {
 			recipe_user_id: req.session.value,

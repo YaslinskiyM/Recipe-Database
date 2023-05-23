@@ -15,5 +15,5 @@ async function getRecipe() { // This function will get the recipe from the datab
 }
 
 function displayRecipe(recipeData) { 
-    console.log(recipeData);
+    // console.log(recipeData);
 }

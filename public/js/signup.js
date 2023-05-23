@@ -14,14 +14,14 @@ const singnupFormHandler = async (event) => {
     var password = $password.value.trim();
 
     if (validateInput(first_name, last_name, login_id, password)) {
-        console.log('cming inside');
+        // console.log('cming inside');
         const response = await fetch('/api/users', {
           method: 'POST',
           body: JSON.stringify({ first_name, last_name, login_id,password}),
           headers: { 'Content-Type': 'application/json' },
         });
         if (response.ok) {
-            console.log('here',response.body)
+            // console.log('here',response.body)
             alert('account created succesfully')
             document.location.replace('/users/home');
         } else {
