@@ -10,12 +10,6 @@ const sequelize = require('./config/connection');
 const hbs = exphbs.create({
 });
 
-//const { Sequelize } = require('sequelize');
-
-//const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  //dialect: 'mysql',
-//});
-
 
 const sess = {
   secret: 'Super secret secret',
@@ -46,4 +40,3 @@ sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () =>  console.log(`App listening at http://localhost:${PORT} 🚀`));
 });
 
-app.listen(process.env.PORT || 3001);
