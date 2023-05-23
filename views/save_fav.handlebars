@@ -6,7 +6,7 @@
         <div class="saved">
             <h3>{{recipe_name}}</h3>
             <button onClick='window.location.href = "saveFavorite/{{this.id}}"'>View</button>
-            <button id = 'deleteSave'value = '{{id}}'>Delete</button>
+            <button class = 'deleteSave'value = '{{id}}'>Delete</button>
         </div>
     {{/each}}
     <h2>favorite Recipes</h2>
@@ -14,7 +14,7 @@
         <div class="saved">
             <h3>{{recipe_name}}</h3>
             <button onClick='window.location.href = "saveFavorite/{{this.id}}"'>View</button>
-            <button id = 'deleteFav' value = '{{id}}'>Delete</button>
+            <button class = 'deleteFavorite' value = '{{id}}'>Delete</button>
         </div>
     {{/each}}
     <button onClick='window.location.href ="/users/home"'>Home</button>
