@@ -111,7 +111,7 @@ router.get("/users/listCategory/:id", withAuth, async (req, res) => {
 			);
 			console.log(recipes, 'test');
 
-			if (recipes.length === 0) {
+			if (recipes.length === 0 && req.params.id <= 0) {
 				console.log('idnull');
 			 	recipeData = await Recipe.findAll();
 				 recipes = recipeData.map((recipe) =>
