@@ -5,25 +5,27 @@
     </h2>
 
     <form id="recipe">
-        <div>
+        <div id="recipeNameContainer">
             <label for="recipeName">Recipe Name:</label>
             <input type="text" id="recipeName" name="recipeName" maxlength="255" required>
         </div>
-        <div>
+        <div id="rescipeDescriptionContainer">
             <label for="recipeDescription">Recipe Description:</label>
-            <textarea id="recipeDescription"name="recipeDescription" maxlength="255" required></textarea>
+            <textarea id="recipeDescription"name="recipeDescription" style="width:190px;"></textarea>
         </div>
-   
-            <select id="categoryOptions">
+   <div id="categoryOptionsSpacing">
+   <select id="categoryOptions">
                 <option value="1">Chicken</option>
                 <option value="2">Beef</option>
                 <option value="3">Fish</option>
                 <option value="4">Pork</option>
                 <option value="5">Shellfish</option>
             </select>
+   </div>
+         
         
-        <div>
-            <button type="submit">submit</button>
+        <div id="recipeSubmit" style="display:flex;justify-content:center;">
+            <button type="submit">Submit</button>
 
         </div>
 
