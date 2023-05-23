@@ -13,6 +13,12 @@
             <label for="recipeDescription">Recipe Description:</label>
             <textarea id="recipeDescription"name="recipeDescription" maxlength="255" required style="width:190px;"></textarea>
         </div>
+        
+        <div id = "recipeSteps">
+            <label for="recipeSteps">Recipe Steps:</label>
+            <textarea class = 'recipeSteps' maxlength="255" required style="width:190px;"></textarea>
+            
+        </div>
    <div id="categoryOptionsSpacing">
    <select id="categoryOptions">
                 <option value="1">Chicken</option>
@@ -30,5 +36,6 @@
         </div>
 
     </form>
+    <button id = "addStep">add Steps</button>
 </div>
 <script src="/js/addRecipe.js"></script>
