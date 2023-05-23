@@ -1,20 +1,20 @@
 {{> nav}}
 <form id="updateForm">
-    <div>
-        <label for="firstName">first Name:</label>
+    <div class="centerForm">
+        <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" value="{{user.first_name}}" disabled>
     </div>
- <div>
-        <label for="lastName">last Name:</label>
+ <div class="centerForm">
+        <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" name="lastName" value="{{user.last_name}}" disabled>
     </div>
 
-    <div>
+    <div class="centerForm">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value="{{user.login_id}}" required>
 
     </div>
-    <div>
+    <div class="centerForm">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" value="{{user.password}}">
     </div>
