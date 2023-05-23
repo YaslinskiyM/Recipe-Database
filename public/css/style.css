@@ -215,6 +215,11 @@ background-color:chartreuse;
   box-shadow: 0 9px #999;
 }
 
+.centerForm {
+    display: flex;
+    justify-content: center;
+}
+
 #updateForm {
     width: 460px;
     height: min-content;
@@ -224,8 +229,4 @@ background-color:chartreuse;
     
 }
 
-.centerForm {
-    display: flex;
-    justify-content: center;
 
-}
