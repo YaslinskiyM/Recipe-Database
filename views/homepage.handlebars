@@ -2,18 +2,19 @@
 <div class="container-fluid">
 <div class="row">
   <div class="col-auto">
-   <h2 id="welcomePage">Welcome to the Your Recipe Homepage {{user.first_name}}!</h2>
+   <h2 id="welcomePage" style="font-size:40px; margin-top: 25px;border-radius: 2px;background: #b1f20b4b;color:rgb(9, 9, 9);">Welcome to the Your Recipe Homepage {{user.first_name}}!</h2>
   </div>
 </div>
 </div>
 
  {{#if recipes.length}}
 
-  <div class="col-md-6 recipe-list">
+  <div class="col-md-6 recipe-list overflow-auto" style="border-radius: 2px; max-height: 65vh; width:fit-content; margin-top: 15px; background: #a8f405d4; color:rgb(9, 9, 9);">
     <div id="featured-recipes"></div>
     {{#each recipes as |recipe|}}
-       <ul>
+       <ul style="list-style-type:none">
                 <li>
+                  <i class="fa-solid fa-bowl-food"></i>
                     <h3>{{recipe_name}}</h3>
                     <p>{{recipe_description}}</p>
                 </li>
